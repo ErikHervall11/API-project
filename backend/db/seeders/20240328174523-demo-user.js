@@ -1,6 +1,13 @@
 "use strict";
 
-const { User } = require("../models");
+const {
+  User,
+  Session,
+  Spot,
+  Booking,
+  Review,
+  ReviewImage,
+} = require("../../db/models");
 const bcrypt = require("bcryptjs");
 
 let options = {};

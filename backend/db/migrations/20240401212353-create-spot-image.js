@@ -11,6 +11,10 @@ module.exports = {
       },
       spotId: {
         type: Sequelize.INTEGER,
+        references: {
+          model: "Spots",
+          key: "id",
+        },
       },
       url: {
         type: Sequelize.INTEGER,
@@ -20,17 +24,11 @@ module.exports = {
       },
       createdAt: {
         type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updatedAt: {
         type: Sequelize.DATE,
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
