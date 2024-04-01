@@ -7,7 +7,14 @@ const {
   restoreUser,
   requireAuth,
 } = require("../../utils/auth");
-const { Spot } = require("../../db/models");
+const {
+  User,
+  Session,
+  Spot,
+  Booking,
+  Review,
+  ReviewImage,
+} = require("../../db/models");
 
 const router = express.Router();
 const { check } = require("express-validator");

@@ -16,10 +16,18 @@ module.exports = (sequelize, DataTypes) => {
       spotId: {
         type: DataTypes.INTEGER,
       },
-      url: DataTypes.INTEGER,
-      preview: DataTypes.BOOLEAN,
-      createdAt: DataTypes.DATE,
-      updatedAt: DataTypes.DATE,
+      url: {
+        type: DataTypes.INTEGER,
+      },
+      preview: {
+        type: DataTypes.BOOLEAN,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+      },
     },
     {
       sequelize,

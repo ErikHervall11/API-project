@@ -14,12 +14,24 @@ module.exports = (sequelize, DataTypes) => {
   }
   Booking.init(
     {
-      spotId: DataTypes.INTEGER,
-      userId: DataTypes.INTEGER,
-      startDate: DataTypes.DATE,
-      endDate: DataTypes.DATE,
-      createdAt: DataTypes.DATE,
-      updatedAt: DataTypes.DATE,
+      spotId: {
+        type: DataTypes.INTEGER,
+      },
+      userId: {
+        type: DataTypes.INTEGER,
+      },
+      startDate: {
+        type: DataTypes.DATE,
+      },
+      endDate: {
+        type: DataTypes.DATE,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+      },
     },
     {
       sequelize,

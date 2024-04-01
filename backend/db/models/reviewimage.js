@@ -13,10 +13,18 @@ module.exports = (sequelize, DataTypes) => {
   }
   ReviewImage.init(
     {
-      reviewId: DataTypes.INTEGER,
-      url: DataTypes.STRING,
-      createdAt: DataTypes.DATE,
-      updatedAt: DataTypes.INTEGER,
+      reviewId: {
+        type: DataTypes.INTEGER,
+      },
+      url: {
+        type: DataTypes.STRING,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        type: DataTypes.INTEGER,
+      },
     },
     {
       sequelize,
