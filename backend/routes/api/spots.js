@@ -22,8 +22,11 @@ const { handleValidationErrors } = require("../../utils/validation");
 const spot = require("../../db/models/spot");
 
 router.get("/", async (req, res, next) => {
-  const spots = await Spot.findAll();
-  res.status(200).json(spots);
+  const spots = await Spot.findAll({
+    include: [Review, SpotImage],
+  });
+  console.log(spots[0].dataValues.Reviews);
+  res.status(200).json({ Spots: spots });
 });
 
 router.get("/current", requireAuth, async (req, res, next) => {
