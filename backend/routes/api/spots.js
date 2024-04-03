@@ -22,10 +22,14 @@ const { handleValidationErrors } = require("../../utils/validation");
 const spot = require("../../db/models/spot");
 
 async function avgStars(...spots) {
-  spots = spots[0];
+  spots = spots.flat();
+  console.log(spots);
+  if (!Array.isArray(spots) || spots.length === 1) {
+    spots = spots;
+  }
   for (const spot of spots) {
     const reviews = await Review.findAll({
-      where: { spotId: spot.dataValues.id },
+      where: { spotId: spot.id },
     });
     const totalStars = reviews.reduce((sum, review) => sum + review.stars, 0);
     spot.dataValues.avgRating = totalStars / reviews.length;
@@ -78,7 +82,7 @@ router.get("/current", requireAuth, async (req, res, next) => {
 
 router.get("/:spotId", async (req, res, next) => {
   const spotId = req.params.spotId;
-  const spot = await Spot.findAll({
+  const spot = await Spot.findOne({
     where: {
       id: spotId,
     },
@@ -87,21 +91,25 @@ router.get("/:spotId", async (req, res, next) => {
         model: SpotImage,
         attributes: ["id", "url", "preview"],
       },
-      // {
-      //   model: Owner,
-      // },
+      {
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+        as: "Owner",
+      },
     ],
   });
-
-  // console.log(spot[0].dataValues.SpotImages);
   if (!spot) {
     let err = new Error();
     err.message = "Spot couldn't be found";
     err.status = 404;
   }
-
+  const reviews = await Review.findAll({
+    where: {
+      spotId: spotId,
+    },
+  });
   await avgStars(spot);
-
+  spot.dataValues.numReviews = reviews.length;
   res.status(200).json(spot);
 });
 
