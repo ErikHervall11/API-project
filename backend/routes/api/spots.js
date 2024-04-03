@@ -64,7 +64,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/current", requireAuth, async (req, res, next) => {
+router.get("/current", handleValidationErrors, async (req, res, next) => {
   const { user } = req;
   try {
     const spots = await Spot.findAll({
@@ -98,10 +98,10 @@ router.get("/:spotId", async (req, res, next) => {
       },
     ],
   });
-  if (!spot) {
-    let err = new Error();
-    err.message = "Spot couldn't be found";
+  if (!spot || spot === null) {
+    let err = new Error("Spot couldn't be found");
     err.status = 404;
+    return next(err);
   }
   const reviews = await Review.findAll({
     where: {
@@ -112,5 +112,45 @@ router.get("/:spotId", async (req, res, next) => {
   spot.dataValues.numReviews = reviews.length;
   res.status(200).json(spot);
 });
+
+router.post(
+  "/",
+  requireAuth,
+  handleValidationErrors,
+  async (req, res, next) => {
+    const { user } = req;
+    const {
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+    } = req.body;
+    try {
+      const newSpot = await Spot.create({
+        ownerId: user.id,
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price,
+      });
+
+      return res.status(201).json(newSpot);
+    } catch (error) {
+      error.status = 400;
+      error.message = "Bad Request";
+      next(error);
+    }
+  }
+);
 
 module.exports = router;
