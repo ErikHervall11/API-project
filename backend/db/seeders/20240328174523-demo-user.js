@@ -2,12 +2,12 @@
 
 const {
   User,
-  Session,
+  SpotImage,
   Spot,
   Booking,
   Review,
   ReviewImage,
-} = require("../../db/models");
+} = require("../models");
 const bcrypt = require("bcryptjs");
 
 let options = {};

@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs");
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const {
   User,
-  Session,
+  SpotImage,
   Spot,
   Booking,
   Review,
