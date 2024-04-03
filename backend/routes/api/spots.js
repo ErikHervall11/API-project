@@ -76,22 +76,33 @@ router.get("/current", requireAuth, async (req, res, next) => {
   }
 });
 
-// router.get("/current", requireAuth, async (req, res, next) => {
-//   const currentUserId = req.user.id;
-//   const ownedSpots = await Spot.findAll({
-//     where: { ownerId: currentUserId },
-//   });
-//   res.status(200).json({ Spots: ownedSpots });
-// });
+router.get("/:spotId", async (req, res, next) => {
+  const spotId = req.params.spotId;
+  const spot = await Spot.findAll({
+    where: {
+      id: spotId,
+    },
+    include: [
+      {
+        model: SpotImage,
+        attributes: ["id", "url", "preview"],
+      },
+      // {
+      //   model: Owner,
+      // },
+    ],
+  });
 
-router.get(":spotId", async (req, res, next) => {
-  const { spotId } = req.params;
-  const spot = await Spot.findByPk(spotId);
+  // console.log(spot[0].dataValues.SpotImages);
   if (!spot) {
-    return res.status(404).json({
-      message: "Spot couldn't be found",
-    });
+    let err = new Error();
+    err.message = "Spot couldn't be found";
+    err.status = 404;
   }
+
+  await avgStars(spot);
+
+  res.status(200).json(spot);
 });
 
 module.exports = router;
