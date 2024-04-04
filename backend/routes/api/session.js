@@ -62,19 +62,11 @@ router.post("/", validateLogin, async (req, res, next) => {
   });
 });
 
-// backend/routes/api/session.js
-// ...
-
-// Log out
 router.delete("/", (_req, res) => {
   res.clearCookie("token");
   return res.json({ message: "success" });
 });
 
-// backend/routes/api/session.js
-// ...
-
-// Restore session user
 router.get("/", (req, res) => {
   const { user } = req;
   if (user) {
