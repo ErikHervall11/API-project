@@ -23,7 +23,7 @@ const spot = require("../../db/models/spot");
 
 async function avgStars(...spots) {
   spots = spots.flat();
-  console.log(spots);
+
   if (!Array.isArray(spots) || spots.length === 1) {
     spots = spots;
   }
@@ -53,6 +53,8 @@ async function findPrevImg(...spots) {
   }
 }
 
+//////////! GET ///////////
+
 router.get("/", async (req, res, next) => {
   try {
     const spots = await Spot.findAll();
@@ -63,6 +65,8 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
+//////////! GET ///////////
 
 router.get("/current", handleValidationErrors, async (req, res, next) => {
   const { user } = req;
@@ -79,6 +83,8 @@ router.get("/current", handleValidationErrors, async (req, res, next) => {
     next(error);
   }
 });
+
+//////////! GET ///////////
 
 router.get("/:spotId", async (req, res, next) => {
   const spotId = req.params.spotId;
@@ -113,6 +119,8 @@ router.get("/:spotId", async (req, res, next) => {
   res.status(200).json(spot);
 });
 
+//////////! POST ///////////
+
 router.post(
   "/",
   requireAuth,
@@ -145,12 +153,117 @@ router.post(
       });
 
       return res.status(201).json(newSpot);
-    } catch (error) {
-      error.status = 400;
-      error.message = "Bad Request";
-      next(error);
+    } catch (err) {
+      err.status = 400;
+      err.message = "Bad Request";
+      next(err);
     }
   }
 );
+
+//////////! POST ///////////
+
+router.post("/:spotId/images", requireAuth, async (req, res, next) => {
+  const { user } = req;
+  const { spotId } = req.params;
+  const { url, preview } = req.body;
+
+  const spot = await Spot.findOne({
+    where: {
+      id: spotId,
+    },
+  });
+
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    throw err;
+  }
+  const newImage = await SpotImage.create({
+    url,
+    preview,
+  });
+
+  res.status(200).json({
+    id: newImage.id,
+    url: newImage.url,
+    preview: newImage.preview,
+  });
+});
+
+//////////! PUT ///////////
+
+router.put(
+  "/:spotId",
+  requireAuth,
+  handleValidationErrors,
+  async (req, res, next) => {
+    const userId = req.user.id;
+    const { spotId } = req.params;
+    const {
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+    } = req.body;
+
+    try {
+      const spot = await Spot.findByPk(spotId);
+
+      if (!spot) {
+        const err = new Error("Spot couldn't be found");
+        err.status = 404;
+        throw err;
+      }
+      // if (spot.ownerId !== userId) {
+      //   return res.status(403).json({ message: "Forbidden" });
+      // }
+
+      await spot.update({
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price,
+      });
+
+      res.status(200).json(spot);
+    } catch (err) {
+      err.status = 404;
+      err.message = "Bad Request";
+      next(err);
+    }
+  }
+);
+
+//////////! DELETE ///////////
+router.delete("/:spotId", requireAuth, async (req, res, next) => {
+  const spotId = req.params.spotId;
+  const userId = req.user.id;
+
+  try {
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+      const err = new Error("Spot couldn't be found");
+      err.status = 404;
+      throw err;
+    }
+
+    await spot.destroy();
+    res.status(200).json({ message: "Successfully deleted" });
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;
