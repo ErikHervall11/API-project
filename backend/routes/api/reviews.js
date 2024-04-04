@@ -75,6 +75,37 @@ router.get("/current", requireAuth, async (req, res, next) => {
   }
 });
 
-//////////! GET ///////////
+//////////! Add an Image to a Review based on the Review's id ///////////
+
+router.post(
+  "/:reviewId/images",
+  requireAuth,
+  handleValidationErrors,
+  async (req, res, next) => {
+    const { reviewId } = req.params;
+    const { url } = req.body;
+    const userId = req.user.id;
+
+    const spot = await Spot.findByPk(userId);
+
+    if (spot.ownerId !== userId) {
+      return res.status(403).json({ message: "Forbidden" });
+    }
+
+    if (!reviewId) {
+      let err = new Error("Review couldn't be found");
+      err.status = 404;
+      throw err;
+    }
+
+    const imagesCount = await ReviewImage.count({ where: { reviewId } });
+    if (imagesCount >= 10) {
+      return res.status(403).json({
+        message: "Maximum number of images for this resource was reached",
+      });
+    }
+    console.log(imagesCount);
+  }
+);
 
 module.exports = router;
