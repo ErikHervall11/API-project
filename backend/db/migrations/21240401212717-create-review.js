@@ -31,6 +31,7 @@ module.exports = {
             model: "Users",
             key: "id",
           },
+          onDelete: "CASCADE",
         },
         review: {
           type: Sequelize.STRING,
@@ -53,6 +54,7 @@ module.exports = {
     );
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Reviews");
+    options.tableName = "Reviews";
+    return queryInterface.dropTable(options);
   },
 };

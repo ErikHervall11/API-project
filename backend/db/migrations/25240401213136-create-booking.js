@@ -23,6 +23,7 @@ module.exports = {
             model: "Spots",
             key: "id",
           },
+          onDelete: "CASCADE",
         },
         userId: {
           type: Sequelize.INTEGER,
@@ -30,6 +31,7 @@ module.exports = {
             model: "Users",
             key: "id",
           },
+          onDelete: "CASCADE",
         },
         startDate: {
           type: Sequelize.DATE,
@@ -50,6 +52,7 @@ module.exports = {
     );
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Bookings");
+    options.tableName = "Bookings";
+    return queryInterface.dropTable(options);
   },
 };
