@@ -22,7 +22,6 @@ const { handleValidationErrors } = require("../../utils/validation");
 const review = require("../../db/models/booking");
 const { route } = require("./bookings");
 const spot = require("../../db/models/spot");
-const { authPlugins } = require("mysql2");
 
 //////////! Get all of the Current User's Bookings ///////////
 
