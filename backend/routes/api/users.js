@@ -70,7 +70,4 @@ router.post("/", validateSignup, async (req, res) => {
   });
 });
 
-// backend/routes/api/users.js
-// ...
-
 module.exports = router;

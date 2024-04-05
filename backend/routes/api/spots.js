@@ -93,21 +93,26 @@ router.get("/", async (req, res, next) => {
 
 //////////! GET ///////////
 
-router.get("/current", handleValidationErrors, async (req, res, next) => {
-  const { user } = req;
-  try {
-    const spots = await Spot.findAll({
-      where: {
-        ownerId: user.id,
-      },
-    });
-    await avgStars(spots);
-    await findPrevImg(spots);
-    res.json(spots);
-  } catch (error) {
-    next(error);
+router.get(
+  "/current",
+  handleValidationErrors,
+  requireAuth,
+  async (req, res, next) => {
+    const { user } = req;
+    try {
+      const spots = await Spot.findAll({
+        where: {
+          ownerId: user.id,
+        },
+      });
+      await avgStars(spots);
+      await findPrevImg(spots);
+      res.json(spots);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 //////////! GET ///////////
 
