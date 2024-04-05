@@ -22,7 +22,7 @@ const { handleValidationErrors } = require("../../utils/validation");
 const spotimage = require("../../db/models/spotimage");
 
 router.delete("/:imageId", requireAuth, async (req, res, next) => {
-  const { imageId } = req.params;
+  const imageId = req.params.imageId;
   const userId = req.user.id;
 
   try {

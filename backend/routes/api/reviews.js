@@ -28,11 +28,6 @@ router.get("/current", requireAuth, async (req, res, next) => {
   try {
     const userId = req.user.id;
 
-    const spot = await Spot.findByPk(userId);
-
-    if (spot.ownerId !== userId) {
-      return res.status(403).json({ message: "Forbidden" });
-    }
     const reviews = await Review.findAll({
       where: { userId: userId },
       include: [
@@ -69,7 +64,7 @@ router.get("/current", requireAuth, async (req, res, next) => {
       ],
     });
 
-    res.status(200).json({ Reviews: reviews });
+    res.status(200).json(reviews);
   } catch (err) {
     next(err);
   }
@@ -86,8 +81,9 @@ router.post(
       const { reviewId } = req.params;
       const { url } = req.body;
       const userId = req.user.id;
+      const parsedReviewId = parseInt(reviewId, 10);
 
-      const review = await Review.findByPk(reviewId);
+      const review = await Review.findByPk(parsedReviewId);
 
       if (!review) {
         res.status(404).json({ message: "Review couldn't be found" });
@@ -96,7 +92,9 @@ router.post(
         res.status(403).json({ message: "Forbidden" });
       }
 
-      const imagesCount = await ReviewImage.count({ where: { reviewId } });
+      const imagesCount = await ReviewImage.count({
+        where: { reviewId: parsedReviewId },
+      });
 
       if (imagesCount >= 10) {
         res.status(403).json({
@@ -104,9 +102,12 @@ router.post(
         });
       }
 
-      const reviewImage = await ReviewImage.create({ reviewId, url });
+      const reviewImage = await ReviewImage.create({
+        reviewId: parsedReviewId,
+        url,
+      });
 
-      res.status(200).json(reviewImage);
+      res.status(200).json({ id: reviewImage.id, url: reviewImage.url });
     } catch (error) {
       next(error);
     }

@@ -57,6 +57,32 @@ module.exports = {
         description: "Place where web developers are created",
         price: 123,
       },
+      {
+        id: 4,
+        ownerId: 4,
+        address: "123345 Four Road",
+        city: "San Francisco",
+        state: "California",
+        country: "United States of America",
+        lat: 81.7645358,
+        lng: -41.4730327,
+        name: "App Academy",
+        description: "yippee blah blah",
+        price: 123,
+      },
+      {
+        id: 5,
+        ownerId: 5,
+        address: "15 Four Road",
+        city: "San Francisco",
+        state: "California",
+        country: "United States of America",
+        lat: 81.7645358,
+        lng: -41.4730327,
+        name: "App Academy",
+        description: "yippee blah blah",
+        price: 123,
+      },
     ]);
     /**
      * Add seed commands here.

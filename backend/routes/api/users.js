@@ -47,27 +47,52 @@ const validateSignup = [
 router.post("/", validateSignup, async (req, res) => {
   const { email, firstName, lastName, password, username } = req.body;
   const hashedPassword = bcrypt.hashSync(password);
-  const user = await User.create({
-    email,
-    firstName,
-    lastName,
-    username,
-    hashedPassword,
-  });
 
-  const safeUser = {
-    id: user.id,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    username: user.username,
-  };
+  const emailExists = await User.findOne({ where: { email } });
+  if (emailExists) {
+    return res.status(500).json({
+      message: "User already exists",
+      errors: { email: "User with that email already exists" },
+    });
+  }
 
-  await setTokenCookie(res, safeUser);
+  const usernameExists = await User.findOne({ where: { username } });
+  if (usernameExists) {
+    return res.status(500).json({
+      message: "User already exists",
+      errors: { username: "User with that username already exists" },
+    });
+  }
 
-  return res.json({
-    user: safeUser,
-  });
+  try {
+    const hashedPassword = bcrypt.hashSync(password);
+    const user = await User.create({
+      email,
+      firstName,
+      lastName,
+      username,
+      hashedPassword,
+    });
+
+    await setTokenCookie(res, user);
+
+    return res.json({
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        username: user.username,
+      },
+    });
+  } catch (error) {
+    return res.status(400).json({
+      message: "Bad Request",
+      errors: {
+        general: "An error occurred during the account creation process.",
+      },
+    });
+  }
 });
 
 module.exports = router;

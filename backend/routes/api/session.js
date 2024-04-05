@@ -20,10 +20,10 @@ const validateLogin = [
   check("credential")
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage("Please provide a valid username or email."),
+    .withMessage("Email or username is required"),
   check("password")
     .exists({ checkFalsy: true })
-    .withMessage("Please provide a password."),
+    .withMessage("Password is required"),
   handleValidationErrors,
 ];
 
