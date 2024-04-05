@@ -56,11 +56,36 @@ async function findPrevImg(...spots) {
 //////////! GET ///////////
 
 router.get("/", async (req, res, next) => {
+  let { page = 1, size = 20 } = req.query;
+  page = parseInt(page);
+  size = parseInt(size);
+
+  if (
+    isNaN(page) ||
+    page < 1 ||
+    page > 10 ||
+    isNaN(size) ||
+    size < 1 ||
+    size > 20
+  ) {
+    return res.status(400).json({
+      message: "Bad Request",
+      errors: {
+        page: "Page must be between 1 and 10",
+        size: "Size must be between 1 and 20",
+      },
+    });
+  }
+
   try {
-    const spots = await Spot.findAll();
+    const offset = (page - 1) * size;
+    const spots = await Spot.findAll({
+      limit: size,
+      offset: offset,
+    });
     await avgStars(spots);
     await findPrevImg(spots);
-    res.json(spots);
+    res.json({ Spots: spots, page, size });
   } catch (error) {
     next(error);
   }
