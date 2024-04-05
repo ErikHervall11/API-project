@@ -30,13 +30,6 @@ router.get("/current", requireAuth, async (req, res, next) => {
   try {
     const userId = req.user.id;
 
-    // const previewImg = await SpotImage.findAll({
-    //   where: {
-    //     id: spot.dataValues.id,
-    //     preview: true,
-    //   },
-    // });
-
     const bookings = await Booking.findAll({
       where: { userId },
       include: [
@@ -152,6 +145,8 @@ router.put(
     }
   }
 );
+
+//////////! Delete a Booking ///////////
 
 router.delete(
   "/:bookingId",
