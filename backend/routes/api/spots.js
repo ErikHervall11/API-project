@@ -449,30 +449,42 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
       return res.status(403).json({ message: "Forbidden" });
     }
 
+    const startDateTime = new Date(startDate);
+    const endDateTime = new Date(endDate);
+
     const conflict = await Booking.findOne({
       where: {
         spotId,
         [Op.or]: [
-          { endDate: startDate },
-          { startDate: endDate },
           {
             startDate: {
-              [Op.lte]: endDate,
-              [Op.gte]: startDate,
+              [Op.lte]: endDateTime,
+              [Op.gte]: startDateTime,
             },
           },
           {
             endDate: {
-              [Op.lte]: endDate,
-              [Op.gte]: startDate,
+              [Op.lte]: endDateTime,
+              [Op.gte]: startDateTime,
             },
           },
           {
             [Op.and]: [
-              { startDate: { [Op.lte]: startDate } },
-              { endDate: { [Op.gte]: endDate } },
+              { startDate: { [Op.lte]: startDateTime } },
+              { endDate: { [Op.gte]: endDateTime } },
             ],
           },
+          {
+            [Op.and]: [
+              { startDate: { [Op.gte]: startDateTime } },
+              { endDate: { [Op.lte]: endDateTime } },
+            ],
+          },
+
+          { startDate: endDateTime },
+          { endDate: startDateTime },
+          { startDate: startDateTime },
+          { endDate: endDateTime },
         ],
       },
     });

@@ -99,6 +99,9 @@ router.put(
           .json({ message: "Past bookings can't be modified" });
       }
 
+      const startDateTime = new Date(startDate);
+      const endDateTime = new Date(endDate);
+
       const conflict = await Booking.findOne({
         where: {
           id: { [Op.ne]: bookingId },
@@ -106,20 +109,33 @@ router.put(
           [Op.or]: [
             {
               startDate: {
-                [Op.between]: [startDate, endDate],
+                [Op.lte]: endDateTime,
+                [Op.gte]: startDateTime,
               },
             },
             {
               endDate: {
-                [Op.between]: [startDate, endDate],
+                [Op.lte]: endDateTime,
+                [Op.gte]: startDateTime,
               },
             },
             {
               [Op.and]: [
-                { startDate: { [Op.lte]: startDate } },
-                { endDate: { [Op.gte]: endDate } },
+                { startDate: { [Op.lte]: startDateTime } },
+                { endDate: { [Op.gte]: endDateTime } },
               ],
             },
+            {
+              [Op.and]: [
+                { startDate: { [Op.gte]: startDateTime } },
+                { endDate: { [Op.lte]: endDateTime } },
+              ],
+            },
+
+            { startDate: endDateTime },
+            { endDate: startDateTime },
+            { startDate: startDateTime },
+            { endDate: endDateTime },
           ],
         },
       });
