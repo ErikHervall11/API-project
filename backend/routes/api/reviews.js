@@ -21,6 +21,24 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const review = require("../../db/models/review");
 
+async function findPrevImg(...reviews) {
+  reviews = reviews[0];
+  for (const review of reviews) {
+    const spot = await Spot.findByPk(review.spotId);
+
+    const previewImg = await SpotImage.findAll({
+      where: {
+        id: spot.id,
+        preview: true,
+      },
+    });
+    if (previewImg.length === 0) {
+      review.Spot.dataValues.previewImage = null;
+    } else {
+      review.Spot.dataValues.previewImage = previewImg[0].dataValues.url;
+    }
+  }
+}
 //////////! GET ///////////
 
 router.get("/current", requireAuth, async (req, res, next) => {
@@ -51,7 +69,9 @@ router.get("/current", requireAuth, async (req, res, next) => {
           include: [
             {
               model: SpotImage,
-              where: { preview: true },
+              where: {
+                preview: true,
+              },
               attributes: ["url"],
             },
           ],
@@ -62,11 +82,54 @@ router.get("/current", requireAuth, async (req, res, next) => {
         },
       ],
     });
+
     for (let i = 0; i < reviews.length; i++) {
       reviews[i].Spot.dataValues.lat = parseFloat(reviews[i].Spot.lat);
       reviews[i].Spot.dataValues.lng = parseFloat(reviews[i].Spot.lng);
       reviews[i].Spot.dataValues.price = parseFloat(reviews[i].Spot.price);
     }
+    await findPrevImg(reviews);
+    //   const payload = [];
+
+    // for(const review of reviews) {
+    //   const reviewImagesArr = await ReviewImage.findAll({
+    //     where: {
+    //       reviewId: review.id,
+    //     },
+    //     attributes: ["id", "url"],
+    //   });
+
+    //   const instance = {
+    //     id: review.id,
+    //     userId: review.User.id,
+    //     spotId: review.spotId,
+    //     review: review.review,
+    //     stars: review.stars,
+    //     createdAt: review.createdAt,
+    //     updatedAt: review.updatedAt,
+    //     User: {
+    //       id: review.User.id,
+    //       firstName: review.User.firstName,
+    //       lastName: review.User.lastName,
+    //     },
+    //     Spot: {
+    //       id: spot.id,
+    //       ownerId: spot.ownerId,
+    //       address: spot.address,
+    //       city: spot.city,
+    //       state: spot.state,
+    //       country: spot.country,
+    //       lat: parseFloat(spot.lat),
+    //       lng: parseFloat(spot.lng),
+    //       name: spot.name,
+    //       price: parseFloat(spot.price),
+    //       previewImage:
+    //         spot.SpotImages.length > 0 ? spot.SpotImages[0].url : null,
+    //     },
+    //     ReviewImages: reviewImagesArr
+    //   };
+    //   payload.push(instance);
+    // }
 
     res.status(200).json({ Reviews: reviews });
   } catch (err) {

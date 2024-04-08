@@ -186,18 +186,21 @@ router.post(
       price,
     } = req.body;
     try {
-      const newSpot = await Spot.create({
+      let newSpot = await Spot.create({
         ownerId: user.id,
         address,
         city,
         state,
         country,
-        lat: parseFloat(lat),
-        lng: parseFloat(lng),
+        lat,
+        lng,
         name,
         description,
-        price: parseFloat(price),
+        price,
       });
+      lat: parseFloat(lat);
+      lng: parseFloat(lng);
+      price: parseFloat(price);
 
       return res.status(201).json(newSpot);
     } catch (err) {
