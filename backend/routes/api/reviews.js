@@ -121,7 +121,7 @@ router.post(
       });
 
       if (imagesCount === 10) {
-        res.status(403).json({
+        return res.status(403).json({
           message: "Maximum number of images for this resource was reached",
         });
       }
