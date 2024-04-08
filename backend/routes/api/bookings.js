@@ -25,6 +25,25 @@ const spot = require("../../db/models/spot");
 
 //////////! Get all of the Current User's Bookings ///////////
 
+async function findPrevImg(...bookings) {
+  bookings = bookings[0];
+  for (const booking of bookings) {
+    const spot = await Spot.findByPk(booking.spotId);
+
+    const previewImg = await SpotImage.findAll({
+      where: {
+        id: spot.id,
+        preview: true,
+      },
+    });
+    if (previewImg.length === 0) {
+      booking.Spot.dataValues.previewImage = null;
+    } else {
+      booking.Spot.dataValues.previewImage = previewImg[0].dataValues.url;
+    }
+  }
+}
+
 router.get("/current", requireAuth, async (req, res, next) => {
   try {
     const userId = req.user.id;
@@ -61,6 +80,7 @@ router.get("/current", requireAuth, async (req, res, next) => {
       bookings[i].Spot.dataValues.lng = parseFloat(bookings[i].Spot.lng);
       bookings[i].Spot.dataValues.price = parseFloat(bookings[i].Spot.price);
     }
+    await findPrevImg(bookings);
     res.status(200).json({ Bookings: bookings });
   } catch (err) {
     next(err);

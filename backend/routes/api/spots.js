@@ -198,9 +198,9 @@ router.post(
         description,
         price,
       });
-      lat: parseFloat(lat);
-      lng: parseFloat(lng);
-      price: parseFloat(price);
+      newSpot.dataValues.lat = parseFloat(newSpot.lat);
+      newSpot.dataValues.lng = parseFloat(newSpot.lng);
+      newSpot.dataValues.price = parseFloat(newSpot.price);
 
       return res.status(201).json(newSpot);
     } catch (err) {
