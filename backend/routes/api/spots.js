@@ -87,9 +87,9 @@ router.get("/", async (req, res, next) => {
     await findPrevImg(spots);
 
     for (let i = 0; i < spots.length; i++) {
-      spots[i].dataValues.lat = parseFloat(spot.lat);
-      spots[i].dataValues.lng = parseFloat(spot.lng);
-      spots[i].dataValues.price = parseFloat(spot.price);
+      spots[i].dataValues.lat = parseFloat(spots[i].lat);
+      spots[i].dataValues.lng = parseFloat(spots[i].lng);
+      spots[i].dataValues.price = parseFloat(spots[i].price);
     }
 
     res.json({ Spots: spots, page, size });
@@ -115,9 +115,9 @@ router.get(
       await avgStars(spots);
       await findPrevImg(spots);
       for (let i = 0; i < spots.length; i++) {
-        spots[i].dataValues.lat = parseFloat(spot.lat);
-        spots[i].dataValues.lng = parseFloat(spot.lng);
-        spots[i].dataValues.price = parseFloat(spot.price);
+        spots[i].dataValues.lat = parseFloat(spots[i].lat);
+        spots[i].dataValues.lng = parseFloat(spots[i].lng);
+        spots[i].dataValues.price = parseFloat(spots[i].price);
       }
       res.json({ Spots: spots });
     } catch (error) {
@@ -342,10 +342,10 @@ router.get("/:spotId/reviews", async (req, res, next) => {
         },
       ],
     });
-    for (let i = 0; i < spots.length; i++) {
-      spot[i].dataValues.lat = parseFloat(spot.lat);
-      spot[i].dataValues.lng = parseFloat(spot.lng);
-      spot[i].dataValues.price = parseFloat(spot.price);
+    for (let i = 0; i < spot.length; i++) {
+      spot[i].dataValues.lat = parseFloat(spot[i].lat);
+      spot[i].dataValues.lng = parseFloat(spot[i].lng);
+      spot[i].dataValues.price = parseFloat(spot[i].price);
     }
     res.status(200).json({ Reviews: reviews });
   } catch (err) {

@@ -56,6 +56,11 @@ router.get("/current", requireAuth, async (req, res, next) => {
         },
       ],
     });
+    for (let i = 0; i < bookings.length; i++) {
+      bookings[i].Spot.dataValues.lat = parseFloat(bookings[i].Spot.lat);
+      bookings[i].Spot.dataValues.lng = parseFloat(bookings[i].Spot.lng);
+      bookings[i].Spot.dataValues.price = parseFloat(bookings[i].Spot.price);
+    }
     res.status(200).json({ Bookings: bookings });
   } catch (err) {
     next(err);
