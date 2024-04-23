@@ -13,4 +13,16 @@
 #navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
+
+#login-button {
+  margin-right: 30px;
+  padding: 3px 10px;
+  border-radius: 7px;
+}
+
+/* #login-dropdown {
+  /* padding-right: 100px; */
+/* text-decoration: none; */
+/* } */
