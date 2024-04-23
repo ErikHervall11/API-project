@@ -40,7 +40,7 @@ function Spots() {
                         {spot.city}, {spot.state}
                       </p>
 
-                      <p>{`$${spot.price}.00 night`}</p>
+                      <p>{`$${spot.price?.toLocaleString()}.00 night`}</p>
                     </div>
                     <div>
                       <p>Rating: {spot.avgRating}</p>
