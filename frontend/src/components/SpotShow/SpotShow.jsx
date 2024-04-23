@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { fetchSpots, fetchReviews } from "../../store/spots";
@@ -71,7 +71,7 @@ function SpotShow() {
 
         <div id="callout-box">
           <div id="reviews-and-cost">
-            <div id="cost-per-night">{`$${spot.price}.00 night`}</div>
+            <div id="cost-per-night">{`$${spot.price.toLocaleString()}.00 night`}</div>
             <div id="reviews-ratings">
               {spot.numReviews === 1
                 ? `${spot.avgRating} Average Stars • Reviews: ${spot.numReviews}`
