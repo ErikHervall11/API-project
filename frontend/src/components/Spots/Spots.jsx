@@ -21,23 +21,32 @@ function Spots() {
         Object.values(spots).map(
           (spot) =>
             !spot.Owner && (
-              <NavLink
-                id="spot"
-                class="tooltip"
-                key={spot.id}
-                to={`/spots/${spot.id}`}
-              >
-                {/* <span class="tooltiptext">{spot.name}</span> */}
-                <img
-                  id="previewImage"
-                  src={spot.previewImage}
-                  alt={`${spot.name} Preview Image`}
-                />
-                <h1>{spot.name}</h1>
-                <p>{spot.city}</p>
-                <p>{spot.state}</p>
-                <p>{`$${spot.price}.00`}</p>
-                <p>{spot.avgRating}</p>
+              <NavLink id="nav" key={spot.id} to={`/spots/${spot.id}`}>
+                <div id="spot-container">
+                  <div id="spot-image-container">
+                    <div id="tool-tip">
+                      <img
+                        id="previewImage"
+                        src={spot.previewImage}
+                        alt={`${spot.name} Preview Image`}
+                      />
+                      <span id="tooltip-text">{spot.name}</span>
+                    </div>
+                  </div>
+                  <div id="spot-info">
+                    <div>
+                      <p>{spot.name}</p>
+                      <p>
+                        {spot.city}, {spot.state}
+                      </p>
+
+                      <p>{`$${spot.price}.00 night`}</p>
+                    </div>
+                    <div>
+                      <p>Rating: {spot.avgRating}</p>
+                    </div>
+                  </div>
+                </div>
               </NavLink>
             )
         )}

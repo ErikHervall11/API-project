@@ -5,28 +5,36 @@
   align-items: center;
 }
 
-/* .tooltip {
+#tool-tip {
   position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-} */
-
-/* .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0; */
-
-/* Position the tooltip */
-/* position: absolute;
-  z-index: 1;
-  top: -5px;
-  left: 105%;
 }
 
-.tooltip:hover .tooltiptext {
+#tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: #f1f2ec;
+  color: #0e233e;
+  box-shadow: 0px 0px 6px 5px #0e233e;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 3px;
+  position: absolute;
+  z-index: 100;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.8s;
+  left: 50%;
+  top: 10%;
+}
+
+#tool-tip:hover #tooltip-text {
   visibility: visible;
-} */
+  opacity: 1;
+}
+
+#spot-info {
+  display: flex;
+  border: SOLID BLACK 3px;
+  /* align-items: center; */
+}

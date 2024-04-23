@@ -24,15 +24,19 @@ const spot = require("../../db/models/spot");
 async function avgStars(...spots) {
   spots = spots.flat();
 
-  if (!Array.isArray(spots) || spots.length === 1) {
-    spots = spots;
-  }
+  // if (!Array.isArray(spots) || spots.length === 1) {
+  //   spots = spots;
+  // }
   for (const spot of spots) {
     const reviews = await Review.findAll({
       where: { spotId: spot.id },
     });
-    const totalStars = reviews.reduce((sum, review) => sum + review.stars, 0);
-    spot.dataValues.avgRating = totalStars / reviews.length;
+    if (reviews.length === 0) {
+      spot.dataValues.avgRating = "New";
+    } else {
+      const totalStars = reviews.reduce((sum, review) => sum + review.stars, 0);
+      spot.dataValues.avgRating = (totalStars / reviews.length).toFixed(1);
+    }
   }
 }
 

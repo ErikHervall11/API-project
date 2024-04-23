@@ -10,3 +10,36 @@
 #spotImages {
   border: black solid 3px;
 }
+
+#callout-box {
+  border: black solid 3px;
+  width: 30%;
+  padding: 14px;
+  /* flex: end; */
+  /* text-align: center; */
+  /* display: inline; */
+}
+#reserve-button {
+  width: 80%;
+  display: flex;
+
+  justify-content: center;
+  padding: 10px;
+}
+#div-button {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+#spot-description {
+  display: flex;
+  justify-content: space-between;
+
+  border-bottom: black solid 3px;
+}
+
+#reviews-and-cost {
+  display: flex;
+  justify-content: space-between;
+}
