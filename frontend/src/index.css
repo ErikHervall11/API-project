@@ -1,1 +1,9 @@
 /* TODO: Add sitewide styles */
+
+* {
+  background-color: #f1f2ec;
+}
+
+#previewImage {
+  width: 300px;
+}

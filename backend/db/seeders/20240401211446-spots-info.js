@@ -29,7 +29,7 @@ module.exports = {
         lng: -122.4730327,
         name: "App Academy",
         description: "Place where web developers are created",
-        price: 123,
+        price: 10023,
       },
       {
         id: 2,
@@ -42,7 +42,7 @@ module.exports = {
         lng: -170.4730327,
         name: "App Academy",
         description: "Place to go hard in the paint",
-        price: 123,
+        price: 12300,
       },
       {
         id: 3,
@@ -68,7 +68,7 @@ module.exports = {
         lng: -41.4730327,
         name: "App Academy",
         description: "yippee blah blah",
-        price: 123,
+        price: 12311,
       },
       {
         id: 5,
@@ -80,8 +80,8 @@ module.exports = {
         lat: 81.7645358,
         lng: -41.4730327,
         name: "App Academy",
-        description: "yippee blah blah",
-        price: 123,
+        description: "wowowowowow",
+        price: 12323,
       },
     ]);
     /**
