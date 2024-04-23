@@ -41,7 +41,7 @@ async function findPrevImg(...spots) {
   for (const spot of spots) {
     const previewImg = await SpotImage.findAll({
       where: {
-        id: spot.dataValues.id,
+        spotId: spot.dataValues.id,
         preview: true,
       },
     });

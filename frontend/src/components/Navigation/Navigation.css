@@ -5,3 +5,12 @@
 .hidden {
   display: none;
 }
+
+#logo {
+  width: 150px;
+}
+
+#navbar {
+  display: flex;
+  justify-content: space-between;
+}
