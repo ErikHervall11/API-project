@@ -28,7 +28,7 @@ module.exports = {
         lng: -122.4730327,
         name: "App Academy",
         description: "Place where web developers are created",
-        price: 185000000,
+        price: 18500000,
       },
       {
         ownerId: 2,
