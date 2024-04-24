@@ -49,47 +49,47 @@ module.exports = {
       },
       {
         spotId: 2,
-        url: "image url",
+        url: "/erabnb-greeceint.jpg",
         preview: false,
       },
       {
         spotId: 2,
-        url: "image url",
+        url: "/erabnb-greecebath.jpg",
         preview: false,
       },
       {
         spotId: 2,
-        url: "image url",
+        url: "/erabnb-greecekitchen.jpg",
         preview: false,
       },
       {
         spotId: 2,
-        url: "image url",
+        url: "/erabnb-greecemarket.jpg",
         preview: false,
       },
       {
         spotId: 3,
-        url: "/erabnb-victorian.jpg",
+        url: "/erabnb-victorianext.jpg",
         preview: true,
       },
       {
         spotId: 3,
-        url: "image url",
+        url: "/erabnb-victorianfoyer.jpg",
         preview: false,
       },
       {
         spotId: 3,
-        url: "image url",
+        url: "/erabnb-victoriandining.jpg",
         preview: false,
       },
       {
         spotId: 3,
-        url: "image url",
+        url: "/erabnb-victorianbath.jpg",
         preview: false,
       },
       {
         spotId: 3,
-        url: "image url",
+        url: "/erabnb-victorianbed.jpg",
         preview: false,
       },
       {
@@ -119,27 +119,27 @@ module.exports = {
       },
       {
         spotId: 5,
-        url: "/erabnb-future.jpg",
+        url: "/erabnb-futureext.jpg",
         preview: true,
       },
       {
         spotId: 5,
-        url: "image url",
+        url: "/erabnb-futuredining.jpg",
         preview: false,
       },
       {
         spotId: 5,
-        url: "image url",
+        url: "/erabnb-futurebath.jpg",
         preview: false,
       },
       {
         spotId: 5,
-        url: "image url",
+        url: "/erabnb-futurebed.jpg",
         preview: false,
       },
       {
         spotId: 5,
-        url: "image url",
+        url: "/erabnb-futurevieww.jpg",
         preview: false,
       },
     ]);
