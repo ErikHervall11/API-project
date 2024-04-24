@@ -22,7 +22,7 @@ function SpotShow() {
       ]).then(() => setIsLoaded(true));
     }
   }, [dispatch, spotId]);
-
+  //
   return (
     <div>
       {isLoaded && spot && (
