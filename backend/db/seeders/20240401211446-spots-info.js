@@ -64,7 +64,7 @@ module.exports = {
         state: "Illinois",
         country: "United States of America",
         lat: 81.7645358,
-        lng: -41.4730327,
+        lng: -41.4730227,
         name: "Hidden Jazz Den",
         description:
           "Step right up and discover the charms of this clandestine delight hidden away in the heart of Chicago. Enter a lively lounge that is the bees knees, decked out in true 1920s fashion. Here, flappers and gents can mingle, sip on classic concoctions from the prohibition era, and tap their feet to the lively tunes of a jazz gramophone. The ambiance is electric, filled with the spirit and excitement of a bygone era. When the night draws to a close, sneak away to a cozy bedroom set discreetly in the corner. Our washroom is outfitted with the finest of the era's design, featuring a luxurious clawfoot tub and elegant pedestal sink. Dare to venture into the basement and glimpse the underpinnings of a lively speakeasy. Here, amongst the shadows of wooden crates and old barrels, the illicit brews concocted away from prying eyes.",
