@@ -15,20 +15,20 @@ function Navigation({ isLoaded }) {
     </li>
   ) : (
     <>
-      <li>
+      <p>
         <OpenModalButton
           buttonText="Log In"
           modalComponent={<LoginFormModal />}
         />
         {/* <NavLink to="/login">Log In</NavLink> */}
-      </li>
-      <li>
+      </p>
+      <p>
         <OpenModalButton
           buttonText="Sign Up"
           modalComponent={<SignupFormModal />}
         />
         {/* <NavLink to="/signup">Sign Up</NavLink> */}
-      </li>
+      </p>
     </>
   );
 
