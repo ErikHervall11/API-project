@@ -1,6 +1,9 @@
+import { csrfFetch } from "./csrf";
+
 const GET_SPOTS = "GET_SPOTS";
 const GET_SPOT_BY_ID = "GET_SPOT_BY_ID";
 const GET_REVIEWS_BY_SPOT_ID = "GET_REVIEWS_BY_SPOT_ID";
+const CREATE_NEW_SPOT = "CREATE_NEW_SPOT";
 
 export const getSpots = (spots) => ({
   type: GET_SPOTS,
@@ -17,15 +20,38 @@ export const getReviewsBySpotId = (reviews) => ({
   payload: reviews,
 });
 
+export const createNewSpot = (spot) => ({
+  type: CREATE_NEW_SPOT,
+  payload: spot,
+});
+
+export const fetchNewSpot = (spot) => async (dispatch) => {
+  const res = await csrfFetch("/api/spots", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(spot),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(createNewSpot(data));
+  } else {
+    const error = await res.json();
+    console.error("Failed to create new spot:", error);
+  }
+};
+
 export const fetchReviews = (spotId) => async (dispatch) => {
-  const res = await fetch(`/api/spots/${spotId}/reviews`);
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
   const data = await res.json();
   dispatch(getReviewsBySpotId(data));
 };
 
 export const fetchSpots = () => async (dispatch) => {
   try {
-    const res = await fetch("/api/spots");
+    const res = await csrfFetch("/api/spots");
     const spots = await res.json();
     dispatch(getSpots(spots));
   } catch (error) {
@@ -35,7 +61,7 @@ export const fetchSpots = () => async (dispatch) => {
 
 export const fetchSpotById = (spotId) => async (dispatch) => {
   try {
-    const res = await fetch(`/api/spots/${spotId}`);
+    const res = await csrfFetch(`/api/spots/${spotId}`);
     if (!res.ok) throw new Error("Failed to fetch the spot data.");
     const spot = await res.json();
     dispatch(getSpotById(spot));
@@ -62,6 +88,12 @@ const spotsReducer = (state = {}, action) => {
 
     case GET_REVIEWS_BY_SPOT_ID:
       return { ...state, reviews: action.payload.Reviews };
+
+    case CREATE_NEW_SPOT:
+      return {
+        ...state,
+        spots: [state.spots, action.payload],
+      };
 
     default:
       return state;

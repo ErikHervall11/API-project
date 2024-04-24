@@ -7,7 +7,6 @@ import "./Spots.css";
 function Spots() {
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spots);
-  console.log("=======================", spots);
 
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
