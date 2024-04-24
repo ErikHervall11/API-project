@@ -23,22 +23,31 @@ export const fetchReviews = (spotId) => async (dispatch) => {
   dispatch(getReviewsBySpotId(data));
 };
 
-export const fetchSpots = (spotId) => async (dispatch) => {
-  if (!spotId) {
+export const fetchSpots = () => async (dispatch) => {
+  try {
     const res = await fetch("/api/spots");
     const spots = await res.json();
     dispatch(getSpots(spots));
-  } else {
+  } catch (error) {
+    console.error("Fetching spots failed:", error);
+  }
+};
+
+export const fetchSpotById = (spotId) => async (dispatch) => {
+  try {
     const res = await fetch(`/api/spots/${spotId}`);
+    if (!res.ok) throw new Error("Failed to fetch the spot data.");
     const spot = await res.json();
     dispatch(getSpotById(spot));
+  } catch (error) {
+    console.error("Fetching spot by ID failed:", error);
   }
 };
 
 const spotsReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_SPOTS: {
-      const newState = { ...state };
+      const newState = {};
       action.payload.Spots.forEach((spot) => {
         newState[spot.id] = spot;
       });
@@ -46,11 +55,14 @@ const spotsReducer = (state = {}, action) => {
     }
     case GET_SPOT_BY_ID: {
       const newState = { ...state };
-      newState.spotId = action.payload;
+      const spot = action.payload;
+      newState.spotId = spot;
       return newState;
     }
+
     case GET_REVIEWS_BY_SPOT_ID:
       return { ...state, reviews: action.payload.Reviews };
+
     default:
       return state;
   }

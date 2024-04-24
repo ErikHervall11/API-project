@@ -5,6 +5,21 @@
   align-items: center;
 }
 
+#spot-container {
+  /* border: black solid 3px; */
+  padding: 0px 10px;
+}
+#spot-info {
+  display: flex;
+  /* border: SOLID BLACK 3px; */
+  /* align-items: center; */
+  flex-direction: column;
+  justify-content: space-between;
+}
+#nav {
+  text-decoration: none;
+}
+
 #tool-tip {
   position: relative;
 }
@@ -31,10 +46,4 @@
 #tool-tip:hover #tooltip-text {
   visibility: visible;
   opacity: 1;
-}
-
-#spot-info {
-  display: flex;
-  border: SOLID BLACK 3px;
-  /* align-items: center; */
 }
