@@ -43,7 +43,7 @@ function NewSpotForm() {
     const newErrors = validateForm();
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
-      let images = { previewImage, img2, img3, img4, img5 };
+      let images = [previewImage, img2, img3, img4, img5];
 
       const spot = {
         country,

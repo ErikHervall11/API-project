@@ -47,6 +47,22 @@ export const updateSpot = (updatedSpotData, spotId) => async (dispatch) => {
   }
 };
 
+export const deleteReview = (reviewId, spotId) => async (dispatch) => {
+  try {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      dispatch(fetchReviews(spotId));
+    } else {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+  } catch (error) {
+    console.error("Error deleting spot:", error);
+  }
+};
+
 export const deleteSpot = (spotId) => async (dispatch) => {
   try {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
@@ -69,7 +85,7 @@ export const fetchUserSpots = () => async (dispatch) => {
   dispatch(getUserSpots(spots));
 };
 
-export const fetchNewSpot = (spot, spotId) => async (dispatch) => {
+export const fetchNewSpot = (spot, images) => async () => {
   const response = await csrfFetch("/api/spots", {
     method: "POST",
     headers: {
@@ -80,7 +96,12 @@ export const fetchNewSpot = (spot, spotId) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
-    dispatch(fetchSpots(spotId));
+    for (const image of images) {
+      await csrfFetch(`/api/spots/${data.id}/images`, {
+        method: "POST",
+        body: JSON.stringify(image),
+      });
+    }
     return data;
   } else {
     const error = await response.json();
