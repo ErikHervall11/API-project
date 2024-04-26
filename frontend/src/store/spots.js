@@ -4,6 +4,7 @@ const GET_SPOTS = "GET_SPOTS";
 const GET_SPOT_BY_ID = "GET_SPOT_BY_ID";
 const GET_REVIEWS_BY_SPOT_ID = "GET_REVIEWS_BY_SPOT_ID";
 const GET_USER_SPOTS = "GET_USER_SPOTS";
+const UPDATE_SPOT = "UPDATE_SPOT";
 
 export const getSpots = (spots) => ({
   type: GET_SPOTS,
@@ -24,6 +25,27 @@ export const getUserSpots = (spots) => ({
   type: GET_USER_SPOTS,
   payload: spots,
 });
+
+export const updateSpotAction = (spot) => ({
+  type: UPDATE_SPOT,
+  payload: spot,
+});
+
+export const updateSpot = (updatedSpotData, spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedSpotData),
+  });
+
+  if (response.ok) {
+    const spot = await response.json();
+    dispatch(updateSpotAction(spot));
+    return spot;
+  }
+};
 
 export const deleteSpot = (spotId) => async (dispatch) => {
   try {
@@ -134,6 +156,14 @@ const spotsReducer = (state = {}, action) => {
       return {
         userSpots: { ...newState },
       };
+    }
+    case UPDATE_SPOT: {
+      const newState = { ...state };
+      newState.userSpots = {
+        ...newState.userSpots,
+        [action.payload.id]: action.payload,
+      };
+      return newState;
     }
 
     default:

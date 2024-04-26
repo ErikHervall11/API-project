@@ -1,10 +1,16 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { fetchNewSpot } from "../../store/spots";
-import { useNavigate } from "react-router-dom";
-import "./NewSpotForm.css";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import { updateSpot, fetchSpotById } from "../../store/spots";
+import "./UpdateSpotForm.css";
 
-function NewSpotForm() {
+function UpdateSpotForm() {
+  const { spotId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const spot = useSelector((state) => state.spots.spotId);
+  //   console.log("====================", spot);
+
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -12,15 +18,46 @@ function NewSpotForm() {
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
-  const [previewImage, setPreviewImage] = useState({ url: "", preview: true });
-  const [img2, setImg2] = useState({ url: "", preview: true });
-  const [img3, setImg3] = useState({ url: "", preview: true });
-  const [img4, setImg4] = useState({ url: "", preview: true });
-  const [img5, setImg5] = useState({ url: "", preview: true });
+  const [previewImage, setPreviewImage] = useState({ url: "", preview: false });
+  const [img2, setImg2] = useState({ url: "", preview: false });
+  const [img3, setImg3] = useState({ url: "", preview: false });
+  const [img4, setImg4] = useState({ url: "", preview: false });
+  const [img5, setImg5] = useState({ url: "", preview: false });
   const [errors, setErrors] = useState({});
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  useEffect(() => {
+    if (spot) {
+      setCountry(spot.country);
+      setAddress(spot.address);
+      setCity(spot.city);
+      setState(spot.state);
+      setDescription(spot.description);
+      setName(spot.name);
+      setPrice(spot.price);
+      setPreviewImage({
+        url: spot?.SpotImages?.[0]?.url || "",
+        preview: true,
+      });
+      setImg2({
+        url: spot?.SpotImages?.[1]?.url || "",
+        preview: true,
+      });
+      setImg3({
+        url: spot?.SpotImages?.[2]?.url || "",
+        preview: true,
+      });
+      setImg4({
+        url: spot?.SpotImages?.[3]?.url || "",
+        preview: true,
+      });
+      setImg5({
+        url: spot?.SpotImages?.[4]?.url || "",
+        preview: true,
+      });
+    } else {
+      dispatch(fetchSpotById(spotId));
+    }
+  }, [dispatch, spot, spotId]);
 
   const validateForm = () => {
     let formErrors = {};
@@ -45,7 +82,7 @@ function NewSpotForm() {
     if (Object.keys(newErrors).length === 0) {
       let images = { previewImage, img2, img3, img4, img5 };
 
-      const spot = {
+      const updatedSpot = {
         country,
         address,
         city,
@@ -56,30 +93,27 @@ function NewSpotForm() {
         name,
         price,
       };
-      const newSpot = await dispatch(fetchNewSpot(spot, images));
-      if (newSpot) {
-        navigate(`/spots/${newSpot.id}`);
+
+      const result = await dispatch(updateSpot(updatedSpot, spotId, images));
+
+      if (result) {
+        navigate(`/spots/${result.id}`);
       }
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Create a New Spot</h1>
-
+    <form onSubmit={handleSubmit} className="update-spot-form">
+      <h1>Update Your Spot</h1>
       <section>
-        <h2>Where&apos;s your place located?</h2>
-        <p>
-          Guests will only get your exact address once they booked a
-          reservation.
-        </p>
+        <h2>Location Information</h2>
         <div>
           <p>Country</p>
           {errors.country && <p className="error">{errors.country}</p>}
           <input
+            id="country"
             type="text"
-            name="country"
-            placeholder="Country"
+            value={country}
             onChange={(e) => setCountry(e.target.value)}
           />
           <p>Address</p>
@@ -87,6 +121,7 @@ function NewSpotForm() {
           <input
             type="text"
             name="address"
+            value={address}
             placeholder="Street Address"
             onChange={(e) => setAddress(e.target.value)}
           />
@@ -95,6 +130,7 @@ function NewSpotForm() {
           <input
             type="text"
             name="city"
+            value={city}
             placeholder="City"
             onChange={(e) => setCity(e.target.value)}
           />
@@ -103,6 +139,7 @@ function NewSpotForm() {
           <input
             type="text"
             name="state"
+            value={state}
             placeholder="State"
             onChange={(e) => setState(e.target.value)}
           />
@@ -122,6 +159,7 @@ function NewSpotForm() {
         <textarea
           placeholder="Please write at least 30 characters"
           name="description"
+          value={description}
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
       </section>
@@ -136,6 +174,7 @@ function NewSpotForm() {
         <input
           type="text"
           name="title"
+          value={name}
           placeholder="Name of your spot"
           onChange={(e) => setName(e.target.value)}
         />
@@ -151,6 +190,7 @@ function NewSpotForm() {
         <input
           type="number"
           name="price"
+          value={price}
           placeholder="Price per night (USD)"
           onChange={(e) => setPrice(e.target.value)}
         />
@@ -166,9 +206,9 @@ function NewSpotForm() {
           <label htmlFor="prevImageURL">
             <input
               type="text"
+              value={previewImage.url}
               placeholder="Preview Image Url"
               id="prevImageURL"
-              value={previewImage.url}
               onChange={(e) =>
                 setPreviewImage((prevState) => ({
                   ...prevState,
@@ -236,9 +276,9 @@ function NewSpotForm() {
         </div>
       </section>
 
-      <button type="submit">Create Spot</button>
+      <button type="submit">Update Your Spot</button>
     </form>
   );
 }
 
-export default NewSpotForm;
+export default UpdateSpotForm;

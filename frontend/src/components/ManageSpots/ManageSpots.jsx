@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { fetchUserSpots } from "../../store/spots";
 import "./ManageSpots.css";
 import DeleteForm from "../DeleteFormModal.jsx/DeleteFormModal";
@@ -8,7 +8,7 @@ import OpenModalButton from "../OpenModalButton/OpenModalButton";
 
 function ManageSpots() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const user = useSelector((state) => state.session.user);
   const userSpots = useSelector((state) => state.spots.userSpots);
 
@@ -52,6 +52,11 @@ function ManageSpots() {
                   </div>
                 </div>
               </NavLink>
+              <OpenModalButton
+                className="update-spot-button"
+                buttonText="Update"
+                onButtonClick={() => navigate(`/spots/${spot.id}/edit`)}
+              />
               <OpenModalButton
                 className="delete-spot-button"
                 buttonText="Delete"
