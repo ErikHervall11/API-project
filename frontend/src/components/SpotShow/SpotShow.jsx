@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { fetchReviews, fetchSpotById } from "../../store/spots";
 import "./SpotShow.css";
 import ReviewModal from "../ReviewModal/ReviewModal";
+import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
 
 function SpotShow() {
   const { spotId } = useParams();
@@ -125,6 +127,19 @@ function SpotShow() {
                     </p>
                     <p>{review.review}</p>
                     <p>Rating: {review.stars}</p>
+
+                    {user && user.id === review.userId && (
+                      <OpenModalButton
+                        className="delete-spot-button"
+                        buttonText="Delete"
+                        modalComponent={
+                          <DeleteReviewModal
+                            spotId={spot.id}
+                            reviewId={review.id}
+                          />
+                        }
+                      />
+                    )}
                   </div>
                 ))}
           </div>
