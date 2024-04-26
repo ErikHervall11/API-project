@@ -16,7 +16,7 @@ function Spots() {
   }, [dispatch]);
 
   return (
-    <div id="spots">
+    <div id="spots" className="spots">
       {isLoaded &&
         Object.values(spots).map(
           (spot) =>
