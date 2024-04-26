@@ -28,7 +28,7 @@ module.exports = {
         lng: -122.4730327,
         name: "Carnivore Cabin",
         description:
-          "Escape to a one-of-a-kind getaway with our rustic cabin nestled in the heart of a breathtaking Jurassic landscape. We provide primitive yet comfortable amenities, spectacular views, and a private backyard. ",
+          "Escape to a one-of-a-kind getaway with our rustic cabin nestled in the heart of a breathtaking Jurassic landscape. We provide primitive yet comfortable amenities, spectacular views, and a private backyard.",
         price: 185000000,
       },
       {
@@ -67,7 +67,7 @@ module.exports = {
         lng: -41.4730227,
         name: "Hidden Jazz Den",
         description:
-          "Step right up and discover the charms of this clandestine delight hidden away in the heart of Chicago. Enter a lively lounge that is the bees knees, decked out in true 1920s fashion. ",
+          "Step right up and discover the charms of this clandestine delight hidden away in the heart of Chicago. Enter a lively lounge that is the bees knees, decked out in true 1920s fashion.",
         price: 1920,
       },
       {
@@ -80,7 +80,7 @@ module.exports = {
         lng: -50.4730327,
         name: "Quantum Serenity",
         description:
-          "Step into the future with our stunning property located in the dynamic skyline of our advanced city, perfect for the discerning traveler of 3267. This ultramodern home is designed with sophistication and cutting-edge technology, offering an unrivaled urban experience. ",
+          "Step into the future with our stunning property located in the dynamic skyline of our advanced city, perfect for the discerning traveler of 3267.",
         price: 3267,
       },
     ]);
