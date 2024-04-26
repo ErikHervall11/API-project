@@ -406,7 +406,16 @@ router.post(
         stars: stars,
       });
 
-      res.status(201).json(newReview);
+      const reviewWithDetails = await Review.findByPk(newReview.id, {
+        include: [
+          {
+            model: User,
+            attributes: ["id", "firstName", "lastName"],
+          },
+        ],
+      });
+
+      res.status(201).json(reviewWithDetails);
     } catch (err) {
       next(err);
     }
