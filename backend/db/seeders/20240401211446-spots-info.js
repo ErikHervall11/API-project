@@ -63,7 +63,7 @@ module.exports = {
         city: "Chicago",
         state: "Illinois",
         country: "United States of America",
-        lat: 81.7645358,
+        lat: 81.7635358,
         lng: -41.4730227,
         name: "Hidden Jazz Den",
         description:
