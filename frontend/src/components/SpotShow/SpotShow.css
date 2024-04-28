@@ -36,17 +36,16 @@ margin-bottom: 80px;
   border: #0e233e solid 3px;
   width: 830px;
   height: 170px;
-  padding: 12px 20px;
+  padding: 40px 50px;
   border-radius: 5px;
 }
 
 
 #div-button button{
   width: 80%;
-  
   border-radius: 5px;
   box-shadow: 1px 1px 2px 2px#0e233e;
-  margin-top: 13px;
+  
 }
 
 #div-button {
@@ -165,6 +164,9 @@ margin-bottom: 80px;
   font-weight: bold;
 }
 
+.city-year{
+  font-size: 20px;
+}
 
 /* .reviews{
   text-align: center;

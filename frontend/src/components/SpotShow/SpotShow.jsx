@@ -40,16 +40,20 @@ function SpotShow() {
         <>
           <div className="spot-show-header">
             <h1>{spot.name}</h1>
-            <p>
-              {spot.city}, {spot.state}, {spot.country}
-            </p>
-            <p>
-              Year{" : "}
-              {spot.price?.toLocaleString()}
-              {spot.city === "Athens" || spot.city === "Jurassic Junction"
-                ? " BC"
-                : ""}
-            </p>
+            <div className="city-year">
+              <p>
+                {spot.city}, {spot.state}, {spot.country}
+              </p>
+              <p>
+                Year{" : "}
+                {spot.price?.toLocaleString()}
+                {spot.city === "Athens" ||
+                spot.city === "Jurassic Junction" ||
+                spot.city === "Kingsbridge"
+                  ? " BC"
+                  : ""}
+              </p>
+            </div>
           </div>
           <div className="full-image-con">
             <div className="images-con">
@@ -85,8 +89,27 @@ function SpotShow() {
                     night
                   </p>
                 </div>
-                <div id="reviews-ratings">
-                  {`${spot.avgRating} Average Stars • ${spot.numReviews} Reviews`}
+                <div className="reviews-ratings-bottom">
+                  <img
+                    src="/starnoback.png"
+                    alt="Star"
+                    style={{ verticalAlign: "middle", width: "20px" }}
+                  />
+                  {typeof spot.avgRating === "number"
+                    ? `${spot.avgRating.toFixed(1)} Average Stars${
+                        spot.numReviews > 0
+                          ? ` • ${spot.numReviews} ${
+                              spot.numReviews === 1 ? "Review" : "Reviews"
+                            }`
+                          : ""
+                      }`
+                    : `${spot.avgRating}${
+                        spot.numReviews > 0
+                          ? ` • ${spot.numReviews} ${
+                              spot.numReviews === 1 ? "Review" : "Reviews"
+                            }`
+                          : ""
+                      }`}
                 </div>
               </div>
               <div id="div-button">
@@ -102,7 +125,28 @@ function SpotShow() {
 
           <div className="reviews">
             <div className="reviews-ratings-bottom">
-              {`${spot.avgRating} Average Stars • Reviews: ${spot.numReviews}`}
+              <img
+                src="/starnoback.png"
+                alt="Star"
+                style={{ verticalAlign: "middle", width: "20px" }}
+              />
+              {reviews.length === 0 && user && user.id !== spot.ownerId
+                ? "Be the first to post a review!"
+                : typeof spot.avgRating === "number"
+                ? `${spot.avgRating.toFixed(1)} Average Stars${
+                    spot.numReviews > 0
+                      ? ` • ${spot.numReviews} ${
+                          spot.numReviews === 1 ? "Review" : "Reviews"
+                        }`
+                      : ""
+                  }`
+                : `${spot.avgRating}${
+                    spot.numReviews > 0
+                      ? ` • ${spot.numReviews} ${
+                          spot.numReviews === 1 ? "Review" : "Reviews"
+                        }`
+                      : ""
+                  }`}
             </div>
 
             {user &&

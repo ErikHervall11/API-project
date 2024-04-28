@@ -30,6 +30,10 @@
   padding: 25px 25px;
 }
 
+.spot-right img {
+  width: 20px;
+}
+
 /* TOOLTIP ------------------ */
 
 #tool-tip {

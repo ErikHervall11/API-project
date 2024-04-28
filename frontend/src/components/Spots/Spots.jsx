@@ -52,7 +52,9 @@ function Spots() {
                       </p>
                     </div>
                     <div id="right" className="spot-right">
-                      <p>Rating: {spot.avgRating}</p>
+                      <p>
+                        <img src="/starnoback.png" /> {spot.avgRating}
+                      </p>
                     </div>
                   </div>
                 </div>

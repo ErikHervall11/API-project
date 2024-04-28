@@ -142,56 +142,56 @@ module.exports = {
         url: "/erabnb-futurevieww.jpg",
         preview: false,
       },
-      // {
-      //   spotId: 6,
-      //   url: "/erabnb-moonext.jpg",
-      //   preview: true,
-      // },
-      // {
-      //   spotId: 6,
-      //   url: "/erabnb-moondining.jpg",
-      //   preview: false,
-      // },
-      // {
-      //   spotId: 6,
-      //   url: "/erabnb-moonbath.jpg",
-      //   preview: false,
-      // },
-      // {
-      //   spotId: 6,
-      //   url: "/erabnb-moonview.jpg",
-      //   preview: false,
-      // },
-      // {
-      //   spotId: 6,
-      //   url: "/erabnb-moonbed.jpg",
-      //   preview: false,
-      // },
-      // {
-      //   spotId: 7,
-      //   url: "/erabnb-medievalext.jpg",
-      //   preview: true,
-      // },
-      // {
-      //   spotId: 7,
-      //   url: "/erabnb-medievalview.jpg",
-      //   preview: false,
-      // },
-      // {
-      //   spotId: 7,
-      //   url: "/erabnb-medievalbath.jpg",
-      //   preview: false,
-      // },
-      // {
-      //   spotId: 7,
-      //   url: "/erabnb-medievalbed.jpg",
-      //   preview: false,
-      // },
-      // {
-      //   spotId: 7,
-      //   url: "/erabnb-medievaldining.jpg",
-      //   preview: false,
-      // },
+      {
+        spotId: 6,
+        url: "/erabnb-moonext.jpg",
+        preview: true,
+      },
+      {
+        spotId: 6,
+        url: "/erabnb-moondining.jpg",
+        preview: false,
+      },
+      {
+        spotId: 6,
+        url: "/erabnb-moonbath.jpg",
+        preview: false,
+      },
+      {
+        spotId: 6,
+        url: "/erabnb-moonview.jpg",
+        preview: false,
+      },
+      {
+        spotId: 6,
+        url: "/erabnb-moonbed.jpg",
+        preview: false,
+      },
+      {
+        spotId: 7,
+        url: "/erabnb-medievalext.jpg",
+        preview: true,
+      },
+      {
+        spotId: 7,
+        url: "/erabnb-medievalview.jpg",
+        preview: false,
+      },
+      {
+        spotId: 7,
+        url: "/erabnb-medievalbath.jpg",
+        preview: false,
+      },
+      {
+        spotId: 7,
+        url: "/erabnb-medievalbed.jpg",
+        preview: false,
+      },
+      {
+        spotId: 7,
+        url: "/erabnb-medievaldining.jpg",
+        preview: false,
+      },
     ]);
   },
 

@@ -9,6 +9,11 @@
   padding-top: 10px;
 }
 
+.manage-spots-header {
+  text-align: center;
+  padding-top: 20px;
+}
+
 .update-spot-button {
   border: #ff5a5f 2px solid;
   color: #0e233e;

@@ -83,32 +83,32 @@ module.exports = {
           "Step into the future with our stunning property located in the dynamic skyline of our advanced city, perfect for the discerning traveler of 3267.",
         price: 3267,
       },
-      // {
-      //   ownerId: 6,
-      //   address: "Address: 1969 Apollo Way",
-      //   city: "Tranquility Base",
-      //   state: "Lunar Highlands",
-      //   country: "The Moon",
-      //   lat: 65.7645358,
-      //   lng: -50.4730327,
-      //   name: "Lunar Legacy Retreat",
-      //   description:
-      //     "Designed in 1969, this retro-futuristic home offers a blend of historical charm and modern luxury, making it a perfect escape for space enthusiasts and history buffs alike.",
-      //   price: 1969,
-      // },
-      // {
-      //   ownerId: 7,
-      //   address: "42 Elderwood Lane",
-      //   city: "Kingsbridge",
-      //   state: "Northshire",
-      //   country: "Eldoria",
-      //   lat: 65.7645358,
-      //   lng: -50.4730327,
-      //   name: "The Baron's Sanctuary",
-      //   description:
-      //     "This enchanting manor captures the essence of medieval charm and craftsmanship. The stone facade, complete with wooden beams and a thatched roof, transports you to a bygone era.",
-      //   price: 1277,
-      // },
+      {
+        ownerId: 6,
+        address: "Address: 1969 Apollo Way",
+        city: "Tranquility Base",
+        state: "Lunar Highlands",
+        country: "The Moon",
+        lat: 65.7645358,
+        lng: -50.4730327,
+        name: "Lunar Legacy Retreat",
+        description:
+          "Designed in 1969, this retro-futuristic home offers a blend of historical charm and modern luxury, making it a perfect escape for space enthusiasts and history buffs alike.",
+        price: 1969,
+      },
+      {
+        ownerId: 7,
+        address: "42 Elderwood Lane",
+        city: "Kingsbridge",
+        state: "Northshire",
+        country: "Eldoria",
+        lat: 65.7645358,
+        lng: -50.4730327,
+        name: "The Baron's Sanctuary",
+        description:
+          "This enchanting manor captures the essence of medieval charm and craftsmanship. The stone facade, complete with wooden beams and a thatched roof, transports you to a bygone era.",
+        price: 1277,
+      },
     ]);
   },
 
