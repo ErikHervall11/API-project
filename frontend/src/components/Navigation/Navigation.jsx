@@ -15,20 +15,24 @@ function Navigation({ isLoaded }) {
     </li>
   ) : (
     <>
-      <p>
-        <OpenModalButton
-          buttonText="Log In"
-          modalComponent={<LoginFormModal />}
-        />
-        {/* <NavLink to="/login">Log In</NavLink> */}
-      </p>
-      <p>
-        <OpenModalButton
-          buttonText="Sign Up"
-          modalComponent={<SignupFormModal />}
-        />
-        {/* <NavLink to="/signup">Sign Up</NavLink> */}
-      </p>
+      <div className="modal-overlay">
+        <div className="modal">
+          <p className="open-modal-button">
+            <OpenModalButton
+              buttonText="Log In"
+              modalComponent={<LoginFormModal />}
+            />
+            {/* <NavLink to="/login">Log In</NavLink> */}
+          </p>
+          <p className="open-modal-button">
+            <OpenModalButton
+              buttonText="Sign Up"
+              modalComponent={<SignupFormModal />}
+            />
+            {/* <NavLink to="/signup">Sign Up</NavLink> */}
+          </p>
+        </div>
+      </div>
     </>
   );
 

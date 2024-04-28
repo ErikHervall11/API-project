@@ -1,45 +1,227 @@
-#spotImage-large {
-  width: 400px;
+.spot-image-large {
+  width: 500px;
   height: auto;
 }
-#spotImage-small {
-  width: 200px;
+.spot-images-small {
+  width: 500px;
   height: auto;
 }
 
-#spotImages {
-  border: black solid 3px;
-}
-
-#callout-box {
-  border: black solid 3px;
-  width: 30%;
-  padding: 14px;
-  /* flex: end; */
-  /* text-align: center; */
-  /* display: inline; */
-}
-#reserve-button {
-  width: 80%;
-  display: flex;
-
-  justify-content: center;
-  padding: 10px;
-}
-#div-button {
-  display: flex;
-  justify-content: center;
-  padding-top: 8px;
+.spot-show-header{
+  margin-left: 7%;
+  margin-bottom: 50px;
+  margin-right: 7%;
 }
 
 #spot-description {
+  margin-top: 40px;
   display: flex;
   justify-content: space-between;
-
-  border-bottom: black solid 3px;
+margin-bottom: 80px;
+  /* border: green 3px solid; */
 }
 
-#reviews-and-cost {
+.host-description{
+  margin-left: 3%;
+  /* border: red solid 3px; */
+  margin-right: 3%;
+}
+
+.host-description h1{
+  font-size: 25px;
+  margin-bottom: 50px;
+}
+
+#callout-box {
+  border: #0e233e solid 3px;
+  width: 830px;
+  height: 170px;
+  padding: 12px 20px;
+  border-radius: 5px;
+}
+
+
+#div-button button{
+  width: 80%;
+  
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px 2px#0e233e;
+  margin-top: 13px;
+}
+
+#div-button {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  margin-top: 5%;
+   
+  
+}
+
+
+#reviews-and-cost {
+  width: 100%;
+  /* display: flex;
+  justify-content: space-between; */
+  font-size: 15px;
+  
+  
+}
+
+.book-now{
+  margin-top: -5px;
+  text-align: center;
+  font-size: 20px;
+  border-bottom: 1px solid #0e233e;
+  
+}
+
+#cost-per-night{
+ 
+  text-align: left;
+}
+#reviews-ratings{
+  margin-top: 15px;
+  /* display: flex; */
+  text-align: right;
+}
+
+.full-image-con {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.images-con {
+  padding: 10px;
+  background-color: #0e233e;
+  box-shadow: 0px 0px 5px 5px#0e233e;
+  border-radius: 5px;
+}
+
+.spot-images-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 5px;
+  border: #f1f2ec solid 3px;
+}
+
+.spot-image-large img,
+.spot-images-small img {
+  transition: transform 0.3s ease, z-index 0s ease 0.3s;
+}
+
+.spot-image-large img:hover {
+  transform: scale(1.2); 
+  z-index: 100; 
+  position: relative; 
+  transition: transform 0.3s ease, z-index 0s ease 0s; /
+}
+.spot-images-small img:hover {
+  transform: scale(1.4); 
+  z-index: 100; 
+  position: relative; 
+  transition: transform 0.3s ease, z-index 0s ease 0s;
+}
+
+.spot-image-large {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.spot-image-large img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px 3px#0e233e;
+}
+
+.spot-images-small {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 10px;
+  gap: 15px;
+}
+
+.spot-images-small img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px 3px#0e233e;
+}
+
+#reserve-button {
+  width: 70%;
+  padding: 10px;
+  font-weight: bold;
+}
+
+#reserve-button:hover {
+  color: #f1f2ec;
+  background-color: #0e233e;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+/* .reviews{
+  text-align: center;
+} */
+
+.reviews-ratings-bottom{
+  /* border-bottom: #0e233e 1px solid; */
+  border-top: rgb(14, 35, 62) 1px solid;
+  padding: 20px 0px;
+  text-align: center;
+  font-size: 20px;
+  color: #0e233e;
+}
+
+.each-review{
+  
+  color: #0e233e;
+  margin-left: 3%;
+  margin-right: 3%;
+  border: solid 1px rgb(14, 35, 62);
+  padding-left: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.post-review-button{
+  margin-left: 3%;
+  padding: 5px 10px;
+  margin-bottom: 15px;
+  color: rgb(14, 35, 62);
+  font-weight: bold;
+  border-radius: 5px;
+}
+.post-review-button:hover{
+  background-color: #0e233e;
+  color: #f1f2ec;
+}
+
+.each-review:hover,
+.each-review:hover * {
+  background-color: rgb(216, 216, 216);
+}
+
+.spot-show-header h1{
+  text-align: center;
+  font-size: 50px;
+}
+
+.rating-review{
+  border-top: #0e233e 1px solid;
+}
+
+.date{
+  margin-left: 20px;
+}
+
+.review{
+  margin-left: 20px;
 }

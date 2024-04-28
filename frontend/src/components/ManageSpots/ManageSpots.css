@@ -1,25 +1,31 @@
 #spots {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  margin-top: 50px;
 }
 
-#spot-container {
-  /* border: black solid 3px; */
-  padding: 0px 10px;
-}
-#spot-info {
+.update-delete-buttons {
   display: flex;
-  /* border: SOLID BLACK 3px; */
-  /* align-items: center; */
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 30px;
+  padding-top: 10px;
 }
-#nav {
+
+.update-spot-button {
+  border: #ff5a5f 2px solid;
+  color: #0e233e;
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-weight: bold;
+}
+.update-spot-button:hover {
+  color: #f1f2ec;
+  background-color: #ff5a5f;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.nav-link-manage {
   text-decoration: none;
 }
-
 #tool-tip {
   position: relative;
 }

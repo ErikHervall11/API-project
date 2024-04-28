@@ -18,10 +18,14 @@ function Navigation({ isLoaded }) {
           <img id="logo" src="/erabnb.jpg" />
         </NavLink>
         <nav id="right-nav">
-          <button onClick={newSpot} id="create-spot-button">
-            Create a New Spot
-          </button>
-          {isLoaded && <ProfileButton user={sessionUser} />}
+          <div className="create-button">
+            {sessionUser && (
+              <button onClick={newSpot} id="create-spot-button">
+                Create a New Spot
+              </button>
+            )}
+          </div>
+          <div>{isLoaded && <ProfileButton user={sessionUser} />}</div>
         </nav>
       </div>
     </>

@@ -1,0 +1,55 @@
+.update-spot-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.update-spot-form section {
+  margin-bottom: 20px;
+}
+
+.update-spot-form h2 {
+  margin-bottom: 10px;
+}
+
+.update-spot-form input[type="text"],
+.update-spot-form input[type="number"],
+.update-spot-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.update-spot-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.update-spot-form button {
+  width: 100%;
+  padding: 15px;
+  background-color: #ff5a5f;
+  color: #f1f2ec;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid #ff5a5f;
+  font-weight: bold;
+}
+
+.update-spot-form button:hover {
+  background-color: #f1f2ec;
+  color: #ff5a5f;
+  border: 2px solid #ff5a5f;
+  font-weight: bold;
+}
+
+.error {
+  color: red; /* Error text color */
+  font-size: 0.8rem; /* Smaller font size for error messages */
+}

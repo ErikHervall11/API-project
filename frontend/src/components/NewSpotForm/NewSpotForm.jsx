@@ -65,178 +65,182 @@ function NewSpotForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Create a New Spot</h1>
+      <div className="create-new-spot-form">
+        <h1>Create a New Spot</h1>
 
-      <section>
-        <h2>Where&apos;s your place located?</h2>
-        <p>
-          Guests will only get your exact address once they booked a
-          reservation.
-        </p>
-        <div>
-          <p>Country</p>
-          {errors.country && <p className="error">{errors.country}</p>}
+        <section>
+          <h2>Where&apos;s your place located?</h2>
+          <p>
+            Guests will only get your exact address once they booked a
+            reservation.
+          </p>
+          <div>
+            <p>Country</p>
+            {errors.country && <p className="error">{errors.country}</p>}
+            <input
+              type="text"
+              name="country"
+              placeholder="Country"
+              onChange={(e) => setCountry(e.target.value)}
+            />
+            <p>Address</p>
+            {errors.address && <p className="error">{errors.address}</p>}
+            <input
+              type="text"
+              name="address"
+              placeholder="Street Address"
+              onChange={(e) => setAddress(e.target.value)}
+            />
+            <p>City</p>
+            {errors.city && <p className="error">{errors.city}</p>}
+            <input
+              type="text"
+              name="city"
+              placeholder="City"
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <p>State</p>
+            {errors.state && <p className="error">{errors.state}</p>}
+            <input
+              type="text"
+              name="state"
+              placeholder="State"
+              onChange={(e) => setState(e.target.value)}
+            />
+          </div>
+        </section>
+
+        <section>
+          <h2>Describe your place to guests</h2>
+          <p>
+            Mention the best features of your space, any special amenities like
+            fast wifi or parking, and what you love about the neighborhood.
+          </p>
+          <p>
+            Description
+            {errors.description && (
+              <p className="error">{errors.description}</p>
+            )}
+          </p>
+          <textarea
+            placeholder="Please write at least 30 characters"
+            name="description"
+            onChange={(e) => setDescription(e.target.value)}
+          ></textarea>
+        </section>
+
+        <section>
+          <h2>Create a title for your spot</h2>
+          <p>
+            Catch guests&apos; attention with a spot title that highlights what
+            makes your place special.
+          </p>
+          {errors.name && <p className="error">{errors.name}</p>}
           <input
             type="text"
-            name="country"
-            placeholder="Country"
-            onChange={(e) => setCountry(e.target.value)}
+            name="title"
+            placeholder="Name of your spot"
+            onChange={(e) => setName(e.target.value)}
           />
-          <p>Address</p>
-          {errors.address && <p className="error">{errors.address}</p>}
+        </section>
+
+        <section>
+          <h2>Set a base price for your spot</h2>
+          <p>
+            Competitive pricing can help your listing stand out and rank higher
+            in search results.
+          </p>
+          {errors.price && <p className="error">{errors.price}</p>}
           <input
-            type="text"
-            name="address"
-            placeholder="Street Address"
-            onChange={(e) => setAddress(e.target.value)}
+            type="number"
+            name="price"
+            placeholder="Price per night (USD)"
+            onChange={(e) => setPrice(e.target.value)}
           />
-          <p>City</p>
-          {errors.city && <p className="error">{errors.city}</p>}
-          <input
-            type="text"
-            name="city"
-            placeholder="City"
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <p>State</p>
-          {errors.state && <p className="error">{errors.state}</p>}
-          <input
-            type="text"
-            name="state"
-            placeholder="State"
-            onChange={(e) => setState(e.target.value)}
-          />
-        </div>
-      </section>
+        </section>
 
-      <section>
-        <h2>Describe your place to guests</h2>
-        <p>
-          Mention the best features of your space, any special amenities like
-          fast wifi or parking, and what you love about the neighborhood.
-        </p>
-        <p>
-          Description
-          {errors.description && <p className="error">{errors.description}</p>}
-        </p>
-        <textarea
-          placeholder="Please write at least 30 characters"
-          name="description"
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
-      </section>
+        <section>
+          <h2>Liven up your spot with photos</h2>
+          <p>Submit a link to at least one photo to publish your spot.</p>
 
-      <section>
-        <h2>Create a title for your spot</h2>
-        <p>
-          Catch guests&apos; attention with a spot title that highlights what
-          makes your place special.
-        </p>
-        {errors.name && <p className="error">{errors.name}</p>}
-        <input
-          type="text"
-          name="title"
-          placeholder="Name of your spot"
-          onChange={(e) => setName(e.target.value)}
-        />
-      </section>
+          {errors.images && <p className="error">{errors.images}</p>}
 
-      <section>
-        <h2>Set a base price for your spot</h2>
-        <p>
-          Competitive pricing can help your listing stand out and rank higher in
-          search results.
-        </p>
-        {errors.price && <p className="error">{errors.price}</p>}
-        <input
-          type="number"
-          name="price"
-          placeholder="Price per night (USD)"
-          onChange={(e) => setPrice(e.target.value)}
-        />
-      </section>
+          <div id="photos-input-field">
+            <label htmlFor="prevImageURL">
+              <input
+                type="text"
+                placeholder="Preview Image Url"
+                id="prevImageURL"
+                value={previewImage.url}
+                onChange={(e) =>
+                  setPreviewImage((prevState) => ({
+                    ...prevState,
+                    url: e.target.value,
+                  }))
+                }
+              />
+            </label>
+            <label htmlFor="image2Input">
+              <input
+                type="text"
+                placeholder="Image URL"
+                id="image2Input"
+                value={img2.url}
+                onChange={(e) =>
+                  setImg2((prevState) => ({
+                    ...prevState,
+                    url: e.target.value,
+                  }))
+                }
+              />
+            </label>
+            <label htmlFor="image3Input">
+              <input
+                id="image3Input"
+                type="text"
+                placeholder="Image URL"
+                value={img3.url}
+                onChange={(e) =>
+                  setImg3((prevState) => ({
+                    ...prevState,
+                    url: e.target.value,
+                  }))
+                }
+              />
+            </label>
+            <label htmlFor="image4Input">
+              <input
+                type="text"
+                id="image4Input"
+                placeholder="Image URL"
+                value={img4.url}
+                onChange={(e) =>
+                  setImg4((prevState) => ({
+                    ...prevState,
+                    url: e.target.value,
+                  }))
+                }
+              />
+            </label>
+            <label htmlFor="image5Input">
+              <input
+                type="text"
+                id="image5Input"
+                placeholder="Image URL"
+                value={img5.url}
+                onChange={(e) =>
+                  setImg5((prevState) => ({
+                    ...prevState,
+                    url: e.target.value,
+                  }))
+                }
+              />
+            </label>
+          </div>
+        </section>
 
-      <section>
-        <h2>Liven up your spot with photos</h2>
-        <p>Submit a link to at least one photo to publish your spot.</p>
-
-        {errors.images && <p className="error">{errors.images}</p>}
-
-        <div id="photos-input-field">
-          <label htmlFor="prevImageURL">
-            <input
-              type="text"
-              placeholder="Preview Image Url"
-              id="prevImageURL"
-              value={previewImage.url}
-              onChange={(e) =>
-                setPreviewImage((prevState) => ({
-                  ...prevState,
-                  url: e.target.value,
-                }))
-              }
-            />
-          </label>
-          <label htmlFor="image2Input">
-            <input
-              type="text"
-              placeholder="Image URL"
-              id="image2Input"
-              value={img2.url}
-              onChange={(e) =>
-                setImg2((prevState) => ({
-                  ...prevState,
-                  url: e.target.value,
-                }))
-              }
-            />
-          </label>
-          <label htmlFor="image3Input">
-            <input
-              id="image3Input"
-              type="text"
-              placeholder="Image URL"
-              value={img3.url}
-              onChange={(e) =>
-                setImg3((prevState) => ({
-                  ...prevState,
-                  url: e.target.value,
-                }))
-              }
-            />
-          </label>
-          <label htmlFor="image4Input">
-            <input
-              type="text"
-              id="image4Input"
-              placeholder="Image URL"
-              value={img4.url}
-              onChange={(e) =>
-                setImg4((prevState) => ({
-                  ...prevState,
-                  url: e.target.value,
-                }))
-              }
-            />
-          </label>
-          <label htmlFor="image5Input">
-            <input
-              type="text"
-              id="image5Input"
-              placeholder="Image URL"
-              value={img5.url}
-              onChange={(e) =>
-                setImg5((prevState) => ({
-                  ...prevState,
-                  url: e.target.value,
-                }))
-              }
-            />
-          </label>
-        </div>
-      </section>
-
-      <button type="submit">Create Spot</button>
+        <button type="submit">Create Spot In Time</button>
+      </div>
     </form>
   );
 }

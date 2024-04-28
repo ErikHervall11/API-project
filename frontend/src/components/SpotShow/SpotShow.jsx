@@ -16,7 +16,6 @@ function SpotShow() {
   const user = useSelector((state) => state.session.user);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  console.log("===============", spot);
 
   useEffect(() => {
     if (spotId) {
@@ -29,60 +28,65 @@ function SpotShow() {
   }, [dispatch, spotId]);
 
   const handleReviewModal = () => setShowReviewModal(true);
-  const closeReviewModal = () => setShowReviewModal(false);
+  const closeReviewModal = () => {
+    setShowReviewModal(false);
+    dispatch(fetchSpotById(spotId));
+    // dispatch(fetchReviews(spotId));
+  };
 
   return (
     <div>
       {isLoaded && spot && (
         <>
-          <div id="spotImages">
-            <div>
-              <h1>{spot.name}</h1>
-              <h2>
-                {spot.city}, {spot.state}, {spot.country}
-              </h2>
-
-              <img
-                id="spotImage-large"
-                src={spot?.SpotImages?.[0]?.url}
-                alt="image 1"
-              />
-              <img
-                id="spotImage-small"
-                src={spot?.SpotImages?.[1]?.url}
-                alt="image 2"
-              />
-              <img
-                id="spotImage-small"
-                src={spot?.SpotImages?.[2]?.url}
-                alt="image 3"
-              />
-              <img
-                id="spotImage-small"
-                src={spot?.SpotImages?.[3]?.url}
-                alt="image 4"
-              />
-              <img
-                id="spotImage-small"
-                src={spot?.SpotImages?.[4]?.url}
-                alt="image 5"
-              />
+          <div className="spot-show-header">
+            <h1>{spot.name}</h1>
+            <p>
+              {spot.city}, {spot.state}, {spot.country}
+            </p>
+            <p>
+              Year{" : "}
+              {spot.price?.toLocaleString()}
+              {spot.city === "Athens" || spot.city === "Jurassic Junction"
+                ? " BC"
+                : ""}
+            </p>
+          </div>
+          <div className="full-image-con">
+            <div className="images-con">
+              <div id="spotImages" className="spot-images-container">
+                <div className="spot-image-large">
+                  <img src={spot?.SpotImages?.[0]?.url} alt="image 1" />
+                </div>
+                <div className="spot-images-small">
+                  <img src={spot?.SpotImages?.[1]?.url} alt="image 2" />
+                  <img src={spot?.SpotImages?.[2]?.url} alt="image 3" />
+                  <img src={spot?.SpotImages?.[3]?.url} alt="image 4" />
+                  <img src={spot?.SpotImages?.[4]?.url} alt="image 5" />
+                </div>
+              </div>
             </div>
           </div>
-
           <div id="spot-description">
-            <div>
-              <p>
+            <div className="host-description">
+              <h1>
                 Hosted by {spot.Owner.firstName} {spot.Owner.lastName}
-              </p>
+              </h1>
               <p>{spot.description}</p>
             </div>
-
             <div id="callout-box">
+              <p className="book-now">Book Now, For Then!</p>
               <div id="reviews-and-cost">
-                <div id="cost-per-night">{`$${spot.price.toLocaleString()} per night`}</div>
+                <div id="cost-per-night">
+                  <p>
+                    <span style={{ fontWeight: "bold" }}>
+                      ${spot.price?.toLocaleString()}.00
+                    </span>
+                    {" / "}
+                    night
+                  </p>
+                </div>
                 <div id="reviews-ratings">
-                  {`${spot.avgRating} Average Stars • Reviews: ${spot.numReviews}`}
+                  {`${spot.avgRating} Average Stars • ${spot.numReviews} Reviews`}
                 </div>
               </div>
               <div id="div-button">
@@ -96,15 +100,20 @@ function SpotShow() {
             </div>
           </div>
 
-          <div id="reviews">
-            <div id="reviews-ratings-bottom">
+          <div className="reviews">
+            <div className="reviews-ratings-bottom">
               {`${spot.avgRating} Average Stars • Reviews: ${spot.numReviews}`}
             </div>
 
             {user &&
               user.id !== spot.ownerId &&
               reviews.find((f) => f.userId === user.id) === undefined && (
-                <button onClick={handleReviewModal}>Post Your Review</button>
+                <button
+                  className="post-review-button"
+                  onClick={handleReviewModal}
+                >
+                  Post Your Review
+                </button>
               )}
             <ReviewModal
               show={showReviewModal}
@@ -117,16 +126,18 @@ function SpotShow() {
                 .slice()
                 .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
                 .map((review, index) => (
-                  <div key={index}>
+                  <div className="each-review" key={index}>
                     <p>{review.User?.firstName || "Anonymous"}</p>
-                    <p>
+                    <p className="date">
                       {new Date(review.createdAt).toLocaleString("default", {
                         month: "long",
                         year: "numeric",
                       })}
                     </p>
-                    <p>{review.review}</p>
-                    <p>Rating: {review.stars}</p>
+                    <div className="rating-review">
+                      <p>Rating: {review.stars}</p>
+                      <p className="review">{review.review}</p>
+                    </div>
 
                     {user && user.id === review.userId && (
                       <OpenModalButton
@@ -134,6 +145,7 @@ function SpotShow() {
                         buttonText="Delete"
                         modalComponent={
                           <DeleteReviewModal
+                            onClose={closeReviewModal}
                             spotId={spot.id}
                             reviewId={review.id}
                           />

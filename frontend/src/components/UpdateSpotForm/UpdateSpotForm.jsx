@@ -9,7 +9,6 @@ function UpdateSpotForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const spot = useSelector((state) => state.spots.spotId);
-  //   console.log("====================", spot);
 
   const [country, setCountry] = useState("");
   const [address, setAddress] = useState("");

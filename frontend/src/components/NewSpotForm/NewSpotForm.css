@@ -1,3 +1,55 @@
+.create-new-spot-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.create-new-spot-form section {
+  margin-bottom: 20px;
+}
+
+.create-new-spot-form h2 {
+  margin-bottom: 10px;
+}
+
+.create-new-spot-form input[type="text"],
+.create-new-spot-form input[type="number"],
+.create-new-spot-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.create-new-spot-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.create-new-spot-form button {
+  width: 100%;
+  padding: 15px;
+  background-color: #ff5a5f;
+  color: #f1f2ec;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid #ff5a5f;
+  font-weight: bold;
+}
+
+.create-new-spot-form button:hover {
+  background-color: #f1f2ec;
+  color: #ff5a5f;
+  border: 2px solid #ff5a5f;
+  font-weight: bold;
+}
+
 .error {
-  color: red;
+  color: red; /* Error text color */
+  font-size: 0.8rem; /* Smaller font size for error messages */
 }

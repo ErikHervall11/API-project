@@ -1,24 +1,36 @@
-#spots {
+.spots {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 
-#spot-container {
-  /* border: black solid 3px; */
-  padding: 0px 10px;
+.spot-container {
+  border: #0e233e solid 3px;
+  box-shadow: 0px 0px 7px 5px#0e233e;
+  padding: 15px 15px;
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease-in-out;
 }
-#spot-info {
+
+.spot-container:hover {
+  box-shadow: 0px 0px 10px 10px#0e233e;
+}
+
+.spot-info {
   display: flex;
-  /* border: SOLID BLACK 3px; */
-  /* align-items: center; */
-  flex-direction: column;
+
+  font-size: 12px;
+  color: #0e233e;
   justify-content: space-between;
 }
-#nav {
+.nav-link {
   text-decoration: none;
+
+  padding: 25px 25px;
 }
+
+/* TOOLTIP ------------------ */
 
 #tool-tip {
   position: relative;
@@ -35,15 +47,15 @@
   font-weight: bold;
   padding: 5px 3px;
   position: absolute;
-  z-index: 100;
+  z-index: 1000;
   transform: translateX(-50%);
   opacity: 0;
-  transition: opacity 0.8s;
+  transition: opacity 0.8s ease-in-out;
+
   left: 50%;
   top: 30%;
 }
 
-#tool-tip:hover #tooltip-text {
-  visibility: visible;
+#tool-tip:hover {
   opacity: 1;
 }

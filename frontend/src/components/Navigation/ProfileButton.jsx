@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
+import { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
+import * as sessionActions from "../../store/session";
+import "/Navigation.css";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -21,9 +22,9 @@ function ProfileButton({ user }) {
       }
     };
 
-    document.addEventListener('click', closeMenu);
+    document.addEventListener("click", closeMenu);
 
-    return () => document.removeEventListener('click', closeMenu);
+    return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
   const logout = (e) => {
@@ -34,21 +35,22 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
-    <>
+    <div className="login-menu">
       <button onClick={toggleMenu}>
         <i className="fas fa-user-circle" />
       </button>
-      <ul className={ulClassName} ref={ulRef}>
-        <li>{user.username}</li>
-        <li>{user.firstName} {user.lastName}</li>
-        <li>{user.email}</li>
-        <li>
+      <p className={ulClassName} ref={ulRef}>
+        <p>{user.username}</p>
+        <p>
+          {user.firstName} {user.lastName}
+        </p>
+        <p>{user.email}</p>
+        <p>
           <button onClick={logout}>Log Out</button>
-        </li>
-      </ul>
-    </>
+        </p>
+      </p>
+    </div>
   );
 }
 
 export default ProfileButton;
-
