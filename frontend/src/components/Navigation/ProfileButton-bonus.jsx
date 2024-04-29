@@ -5,10 +5,11 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -35,8 +36,10 @@ function ProfileButton({ user }) {
 
   const logout = (e) => {
     e.preventDefault();
-    dispatch(sessionActions.logout());
-    closeMenu();
+    dispatch(sessionActions.logout()).then(() => {
+      closeMenu();
+      navigate("/");
+    });
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -53,12 +56,15 @@ function ProfileButton({ user }) {
       <ul id="login-dropdown" className={ulClassName} ref={ulRef}>
         {user ? (
           <div className="login-menu">
+            <p>Hello, {user.firstName}</p>
             <p>{user.username}</p>
             <p>
               {user.firstName} {user.lastName}
             </p>
             <p>{user.email}</p>
-            <Link to="/spots/current">Manage Spots</Link>
+            <Link className="manage-spots-dropdown" to="/spots/current">
+              Manage Spots
+            </Link>
             <p>
               <button onClick={logout}>Log Out</button>
             </p>

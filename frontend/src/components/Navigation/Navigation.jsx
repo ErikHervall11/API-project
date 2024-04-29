@@ -22,14 +22,14 @@ function Navigation({ isLoaded }) {
               buttonText="Log In"
               modalComponent={<LoginFormModal />}
             />
-            {/* <NavLink to="/login">Log In</NavLink> */}
+            <NavLink to="/login">Log In</NavLink>
           </p>
           <p className="open-modal-button">
             <OpenModalButton
               buttonText="Sign Up"
               modalComponent={<SignupFormModal />}
             />
-            {/* <NavLink to="/signup">Sign Up</NavLink> */}
+            <NavLink to="/signup">Sign Up</NavLink>
           </p>
         </div>
       </div>

@@ -1,0 +1,27 @@
+.signup-header h1 {
+  margin-left: 10px;
+}
+
+.signup-box {
+  padding: 30px;
+  border: 3px solid #0e233e;
+}
+
+.email,
+.username,
+.first,
+.last,
+.pass,
+.confirm {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.email input,
+.username input,
+.first input,
+.last input,
+.pass input,
+.confirm input {
+  margin-left: 20px;
+}

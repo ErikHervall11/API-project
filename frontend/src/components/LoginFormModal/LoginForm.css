@@ -1,0 +1,31 @@
+#login-demo {
+  margin: 30px 0px 10px 10px;
+}
+
+.login-box h1 {
+  margin-bottom: 40px;
+}
+
+.login-box {
+  padding: 30px;
+  border: 3px solid #0e233e;
+}
+
+.username-email {
+  margin-bottom: 20px;
+}
+.un-em input {
+  margin-left: 10px;
+}
+.pass input {
+  margin-left: 10px;
+}
+.password {
+  margin-top: 20px;
+}
+
+.login-button {
+  margin-top: 20px;
+
+  margin-left: 10px;
+}

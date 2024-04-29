@@ -32,8 +32,8 @@ function NewSpotForm() {
     if (!price) formErrors.price = "Price per night is required";
     if (description.length < 30)
       formErrors.description = "Description needs 30 or more characters";
-    if (!previewImage.url || !img2.url || !img3.url || !img4.url || !img5.url)
-      formErrors.images = "Preview Image URL is required";
+    if (!previewImage.url)
+      formErrors.previewImage = "Preview Image URL is required";
 
     return formErrors;
   };
@@ -43,7 +43,13 @@ function NewSpotForm() {
     const newErrors = validateForm();
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
-      let images = [previewImage, img2, img3, img4, img5];
+      let images = [
+        previewImage,
+        img2.url ? img2 : { ...img2, url: "/erabnb.jpg" },
+        img3.url ? img3 : { ...img3, url: "/erabnb.jpg" },
+        img4.url ? img4 : { ...img4, url: "/erabnb.jpg" },
+        img5.url ? img5 : { ...img5, url: "/erabnb.jpg" },
+      ];
 
       const spot = {
         country,
@@ -163,7 +169,9 @@ function NewSpotForm() {
           <h2>Liven up your spot with photos</h2>
           <p>Submit a link to at least one photo to publish your spot.</p>
 
-          {errors.images && <p className="error">{errors.images}</p>}
+          {errors.previewImage && (
+            <p className="error">{errors.previewImage}</p>
+          )}
 
           <div id="photos-input-field">
             <label htmlFor="prevImageURL">
