@@ -19,63 +19,67 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await Review.bulkCreate([
       {
-        spotId: 1,
+        spotId: 2,
         userId: 1,
-        review: "Great place!",
+        review:
+          "Not a big fan of pillars. Not terrible though. The produce right outside was convenient",
+        stars: 2,
+      },
+      {
+        spotId: 3,
+        userId: 1,
+        review: "Gorgeous home. Very elegant.",
         stars: 5,
       },
       {
         spotId: 1,
-        userId: 1,
-        review: "Love the view!",
-        stars: 4,
-      },
-      {
-        spotId: 2,
         userId: 2,
-        review: "Great place!",
-        stars: 2,
-      },
-      {
-        spotId: 2,
-        userId: 2,
-        review: "Love the view!",
+        review: "Cozy home. A great way to get away.",
         stars: 4,
       },
       {
         spotId: 3,
-        userId: 3,
-        review: "Great place!",
-        stars: 3,
-      },
-      {
-        spotId: 3,
-        userId: 3,
-        review: "Nice!",
+        userId: 2,
+        review: "So much nicer than my dirty NYC apartment.",
         stars: 4,
       },
       {
-        spotId: 4,
-        userId: 4,
-        review: "Not good!",
-        stars: 1,
-      },
-      {
-        spotId: 4,
-        userId: 4,
-        review: "Never Again!",
-        stars: 1,
+        spotId: 6,
+        userId: 3,
+        review:
+          "What an experience. Now, back on Earth, I still feel like I'm floating!",
+        stars: 5,
       },
       {
         spotId: 5,
+        userId: 3,
+        review:
+          "I was expecting more robots in the future, but the view was amazing and the cars were really fast!",
+        stars: 4,
+      },
+      {
+        spotId: 1,
+        userId: 4,
+        review: "I was almost eaten by a Velociraptor. Will NOT book again!",
+        stars: 1,
+      },
+      {
+        spotId: 6,
+        userId: 4,
+        review:
+          "Who would have thought they went to the moon to build this! I had no idea!",
+        stars: 5,
+      },
+      {
+        spotId: 4,
         userId: 5,
-        review: "Love the view!",
+        review: "Great cocktails. Just stay away from the bathtub gin...",
         stars: 3,
       },
       {
-        spotId: 5,
+        spotId: 1,
         userId: 5,
-        review: "Comfy Bed",
+        review: "Tyrannosaurus, Triceratops, and Brontosaurus, OH MY!",
         stars: 4,
       },
     ]);
