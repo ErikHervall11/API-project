@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
-import * as sessionActions from '../../store/session';
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import * as sessionActions from "../../store/session";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -16,17 +16,32 @@ function SignupFormPage() {
 
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
+  const validateEmail = (email) => {
+    const emailReg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return emailReg.test(email);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
+    let newErrors = {};
+
+    if (!validateEmail(email)) {
+      newErrors.email = "Invalid email address";
+    }
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword =
+        "Confirm Password field must be the same as the Password field";
+    }
+
+    if (Object.keys(newErrors).length === 0) {
       setErrors({});
-      return dispatch(
+      dispatch(
         sessionActions.signup({
           email,
           username,
           firstName,
           lastName,
-          password
+          password,
         })
       ).catch(async (res) => {
         const data = await res.json();
@@ -35,9 +50,6 @@ function SignupFormPage() {
         }
       });
     }
-    return setErrors({
-      confirmPassword: "Confirm Password field must be the same as the Password field"
-    });
   };
 
   return (
@@ -53,7 +65,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p className="error-message">{errors.email}</p>}
         <label>
           Username
           <input
@@ -63,7 +75,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
+        {errors.username && <p className="error-message">{errors.username}</p>}
         <label>
           First Name
           <input
@@ -73,7 +85,9 @@ function SignupFormPage() {
             required
           />
         </label>
-        {errors.firstName && <p>{errors.firstName}</p>}
+        {errors.firstName && (
+          <p className="error-message">{errors.firstName}</p>
+        )}
         <label>
           Last Name
           <input
@@ -83,7 +97,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        {errors.lastName && <p>{errors.lastName}</p>}
+        {errors.lastName && <p className="error-message">{errors.lastName}</p>}
         <label>
           Password
           <input
@@ -93,7 +107,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
+        {errors.password && <p className="error-message">{errors.password}</p>}
         <label>
           Confirm Password
           <input
@@ -103,7 +117,9 @@ function SignupFormPage() {
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        {errors.confirmPassword && (
+          <p className="error-message">{errors.confirmPassword}</p>
+        )}
         <button type="submit">Sign Up</button>
       </form>
     </>

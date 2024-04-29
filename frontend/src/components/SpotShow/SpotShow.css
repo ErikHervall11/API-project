@@ -18,12 +18,12 @@
   display: flex;
   justify-content: space-between;
 margin-bottom: 80px;
-  /* border: green 3px solid; */
+  
 }
 
 .host-description{
   margin-left: 3%;
-  /* border: red solid 3px; */
+  
   margin-right: 3%;
 }
 

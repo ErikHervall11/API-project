@@ -34,9 +34,7 @@ function ReviewModal({ show, onClose, spotId }) {
             onClose();
             setError("");
           }}
-        >
-          ×
-        </button>
+        ></button>
         <form onSubmit={handleSubmit}>
           <h2>How was your stay?</h2>
           {error && <p className="error-message">{error}</p>}
