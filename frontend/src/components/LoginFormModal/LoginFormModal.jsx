@@ -26,7 +26,7 @@ function LoginFormModal() {
 
   const demoUser = () => {
     return dispatch(
-      sessionActions.login({ credential: "Demo-lition", password: "password" })
+      sessionActions.login({ credential: "E-Money", password: "password" })
     ).then(closeModal);
   };
 
